@@ -68,9 +68,10 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
       .attr("stroke-opacity", 0.1)
     .selectAll("path")
     .data(data)
+	.enter()
     .join("path")
       .attr("d", hexbin.hexagon())
-      .attr("transform", d => `translate(${d.x},${d.y})`)
+      .attr("transform", function(d) {"translate(${d.x},${d.y})"})
       .attr("fill", "#69b3a2");
 	
   // new X axis
