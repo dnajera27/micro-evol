@@ -32,6 +32,12 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dataset.csv", function(data) {
 
+var hexbin = d3.hexbin()
+    .x(d => x(d.x))
+    .y(d => y(d.y))
+    .radius(radius * width / 954)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]])
+	
   var color = d3.scaleSequential(d3.interpolateRdBu)
     .domain([0, 1])
 
