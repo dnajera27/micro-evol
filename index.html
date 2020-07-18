@@ -53,16 +53,25 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
     .call(d3.axisLeft(y));
 
   // Add dots
-  svg.append('g')
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.x); } )
-      .attr("cy", function (d) { return y(d.y); } )
-      .attr("r", 6)
-      .style("fill",  "#69b3a2");
+//  svg.append('g')
+//    .selectAll("dot")
+//    .data(data)
+//    .enter()
+//    .append("circle")
+//     .attr("cx", function (d) { return x(d.x); } )
+//      .attr("cy", function (d) { return y(d.y); } )
+//      .attr("r", 6)
+//      .style("fill",  "#69b3a2");
 
+  svg.append("g")
+      .attr("stroke", "#000")
+      .attr("stroke-opacity", 0.1)
+    .selectAll("path")
+    .data(data)
+    .join("path")
+      .attr("d", hexbin.hexagon())
+      .attr("transform", d => `translate(${d.x},${d.y})`)
+      .attr("fill", "#69b3a2");
 	
   // new X axis
 // x.domain([-1, 1])
@@ -72,11 +81,11 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
 //    .attr("opacity", "1")
 //    .call(d3.axisBottom(x));
 
-  svg.selectAll("circle")
-    .transition()
-    .delay(function(d,i){return(d.time*10)})
-    .duration(10000)
-    .style("fill",  function (d) { return color(d.T); });
+//  svg.selectAll("circle")
+//    .transition()
+//    .delay(function(d,i){return(d.time*10)})
+//    .duration(10000)
+ //   .style("fill",  function (d) { return color(d.T); });
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 })
