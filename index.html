@@ -16,7 +16,7 @@
 <script>
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
+var margin = {top: 10, right: 100, bottom: 30, left: 60},
     width = 600 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
     // append the svg object to the body of the page
@@ -41,9 +41,9 @@ var text = svg.selectAll("text")
 
 //Add SVG Text Element Attributes
 var textLabels = text
-                 .attr("x", width)
-                 .attr("y", 0)
-                 .text('this is text')
+                 .attr("x", width - margin.right)
+                 .attr("y", margin.top)
+                 .text('Thermal history during AM build')
                  .attr("font-family", "sans-serif")
                  .attr("font-size", "20px")
                  .attr("fill", "red");
@@ -102,6 +102,12 @@ svg.selectAll("circle")
     .delay(20000)
     .duration(10000)
     .style("fill",  "#69b3a2");
+	
+svg.selectAll("text")
+    .transition()
+    .delay(20000)
+    .duration(10000)
+    .text('Resulting grain structure');
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 })
