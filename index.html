@@ -33,7 +33,21 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dataset.csv", function(data) {
 
+//Add the SVG Text Element to the svgContainer
+var text = svg.selectAll("text")
+                        .data(data)
+                        .enter()
+                        .append("text");
 
+//Add SVG Text Element Attributes
+var textLabels = text
+                 .attr("x", width)
+                 .attr("y", 0)
+                 .text('this is text')
+                 .attr("font-family", "sans-serif")
+                 .attr("font-size", "20px")
+                 .attr("fill", "red");
+	
   var color = d3.scaleSequential(d3.interpolateRdBu)
     .domain([0, 1])
 
