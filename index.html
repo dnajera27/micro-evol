@@ -61,7 +61,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
       .attr("cx", function (d) { return x(d.x); } )
       .attr("cy", function (d) { return y(d.y); } )
       .attr("r", 1.5)
-      .style("fill", color(d.T));
+      .style("fill",  function (d) { return color(d.T); });
 
 	
   // new X axis
