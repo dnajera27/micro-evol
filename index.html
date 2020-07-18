@@ -32,11 +32,11 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dataset.csv", function(data) {
 
   var color = d3.scaleSequential(d3.interpolateBuPu)
-    .domain([d3.min(d.T), d3.max(d.T)])
+    .domain([0, 1])
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 1])
+    .domain([-1, 1])
     .range([ 0, width ]);
   svg.append("g")
     .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
@@ -46,7 +46,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 1])
+    .domain([-1, 1])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -64,7 +64,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
 
 	
   // new X axis
-  x.domain([0, 1])
+  x.domain([-1, 1])
   svg.select(".myXaxis")
     .transition()
     .duration(2000)
