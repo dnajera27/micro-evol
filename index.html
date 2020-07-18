@@ -60,21 +60,21 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
     .append("circle")
       .attr("cx", function (d) { return x(d.x); } )
       .attr("cy", function (d) { return y(d.y); } )
-      .attr("r", 1.5)
+      .attr("r", 5)
       .style("fill",  function (d) { return color(d.T); });
 
 	
   // new X axis
-  x.domain([-1, 1])
-  svg.select(".myXaxis")
-    .transition()
-    .duration(2000)
-    .attr("opacity", "1")
-    .call(d3.axisBottom(x));
+// x.domain([-1, 1])
+//  svg.select(".myXaxis")
+//    .transition()
+//    .duration(2000)
+//    .attr("opacity", "1")
+//    .call(d3.axisBottom(x));
 
   svg.selectAll("circle")
     .transition()
-    .delay(function(d,i){return(d.time*10)})
+    .delay(function(d,i){return(d.time*200)})
     .duration(2000)
     .attr("cx", function (d) { return x(d.x); } )
     .attr("cy", function (d) { return y(d.y); } )
