@@ -74,7 +74,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
 
   svg.selectAll("circle")
     .transition()
-    .delay(function(d,i){return(d.time*2000)})
+    .delay(function(d,i){return(i*3)})
     .duration(2000)
     .style("fill",  function (d) { return color(d.T); });
     //.attr("cx", function (d) { return x(d.x); } )
