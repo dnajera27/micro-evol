@@ -36,7 +36,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dat
 var hexbin = d3.hexbin()
     .x(d => x(d.x))
     .y(d => y(d.y))
-    .radius(radius * width / 954)
+    .radius(10 * width / 954)
     .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]])
 	
   var color = d3.scaleSequential(d3.interpolateRdBu)
