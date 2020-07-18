@@ -34,13 +34,13 @@ var margin = {top: 10, right: 100, bottom: 30, left: 60},
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dataset.csv", function(data) {
 
 //Add the SVG Text Element to the svgContainer
-var text = svg.selectAll("text")
+var annotation = svg.selectAll("annotation")
                         .data(data)
                         .enter()
-                        .append("text");
+                        .append("annotation");
 
 //Add SVG Text Element Attributes
-var textLabels = text
+var textLabels = annotation
                  .attr("x", width - margin.right)
                  .attr("y", margin.top)
                  .text('Thermal history during AM build')
@@ -103,7 +103,7 @@ svg.selectAll("circle")
     .duration(10000)
     .style("fill",  "#69b3a2");
 	
-svg.selectAll("text")
+svg.selectAll("annotation")
     .transition()
     .delay(20000)
     .duration(10000)
