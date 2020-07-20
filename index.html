@@ -31,7 +31,7 @@ var margin = {top: 10, right: 100, bottom: 30, left: 60},
 
     
 //Read the data
-d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/test_dataset.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data.csv", function(data) {
 
 //Add the SVG Text Element to the svgContainer
 var annotation = svg.selectAll("annotation")
@@ -49,11 +49,11 @@ var textLabels = annotation
                  .attr("fill", "red");
 	
   var color = d3.scaleSequential(d3.interpolateRdBu)
-    .domain([0, 1])
+    .domain([300, 1600])
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([-1, 1])
+    .domain([-0.004, 0.004])
     .range([ 0, width ]);
   svg.append("g")
     .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
@@ -63,7 +63,7 @@ var textLabels = annotation
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([-1, 1])
+    .domain([-0.004, 0.004])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
