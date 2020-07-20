@@ -91,18 +91,18 @@ var textLabels = annotation
 
   svg.selectAll("circle")
     .transition()
-    .delay(1000)
+    .delay(10000)
     .duration(1000)
     .style("fill",  function (d) { return color(d.T1); });
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 	
 
-//svg.selectAll("circle")
-//    .transition()
-//    .delay(20000)
- //   .duration(10000)
- //   .style("fill",  "#69b3a2");
+svg.selectAll("circle")
+    .transition()
+    .delay(20000)
+    .duration(10000)
+    .style("fill",  "#69b3a2");
 	
 //svg.selectAll("annotation")
 //    .transition()
