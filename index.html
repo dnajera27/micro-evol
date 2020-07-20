@@ -28,11 +28,16 @@ var margin = {top: 10, right: 100, bottom: 30, left: 60},
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")")
 
-
+// Get a subset of the data based on timestep
+function getFilteredData(data, ts) {
+	return data.filter(function(d) { return d.time === ts; });
+}
     
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data.csv", function(data) {
 
+var filt_data = getFilteredData(data, 0.)
+	
 //Add the SVG Text Element to the svgContainer
 var annotation = svg.selectAll("annotation")
                         .data(data)
