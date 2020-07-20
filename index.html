@@ -90,7 +90,7 @@ var textLabels = annotation
 
   svg.selectAll("circle")
     .transition()
-    .delay(function(d,i){return(d.time*100)})
+    .delay(function(d,i){return(d.time*20)})
     .duration(20000)
     .style("fill",  function (d) { return color(d.T); });
     //.attr("cx", function (d) { return x(d.x); } )
@@ -103,11 +103,11 @@ svg.selectAll("circle")
     .duration(10000)
     .style("fill",  "#69b3a2");
 	
-svg.selectAll("annotation")
-    .transition()
-    .delay(20000)
-    .duration(10000)
-    .text('Resulting grain structure');
+//svg.selectAll("annotation")
+//    .transition()
+//    .delay(20000)
+//    .duration(10000)
+//    .text('Resulting grain structure');
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 })
