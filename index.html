@@ -20,8 +20,8 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 200, bottom: 30, left: 60},
-    width = 600 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    width = 600,
+    height = 600;
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
       .append("svg")
@@ -101,11 +101,11 @@ for(i=0;i<=47;i++){
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 	
-svg.selectAll("annotation")
-    .transition()
-    .delay(500)
-    .duration(10000)
-    .text('Thermal history');
+//svg.selectAll("annotation")
+//    .transition()
+//    .delay(500)
+//    .duration(10000)
+//    .text('Thermal history');
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 })
