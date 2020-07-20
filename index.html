@@ -78,7 +78,7 @@ var textLabels = annotation
      .attr("cx", function (d) { return x(d.x); } )
       .attr("cy", function (d) { return y(d.y); } )
       .attr("r", 6)
-      .style("fill",  "gray");
+      .style("fill",  function (d) { return color(d.T0); });
 
 
   // new X axis
