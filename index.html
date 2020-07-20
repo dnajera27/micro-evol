@@ -8,6 +8,7 @@
 <body>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
+<div id="txt"></div>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.js"></script>
@@ -30,14 +31,21 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")")
 
-
+    var svg_text = d3.select("#txt")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate("width + margin.left + margin.right + margin.left + ","height + margin.top + margin.bottom + margin.top + ")")
+    
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 var valueKey = data.columns;
 	
 
 //Add the SVG Text Element to the svgContainer
-var annotation = svg.selectAll("annotation")
+var annotation = svg_text.selectAll("annotation")
                         .data(data)
                         .enter()
                         .append("annotation");
@@ -101,11 +109,11 @@ for(i=0;i<=47;i++){
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 	
-//svg.selectAll("annotation")
-//    .transition()
-//    .delay(20000)
-//    .duration(10000)
-//    .text('Resulting grain structure');
+svg_text.selectAll("annotation")
+    .transition()
+    .delay(500)
+    .duration(10000)
+    .text('Thermal history');
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
 })
