@@ -90,10 +90,10 @@ var textLabels = annotation
 //    .call(d3.axisBottom(x));
 
   svg.selectAll("circle")
-    .transition()
-    .delay(function(d,i){return(1000)})
-    .duration(1000)
     .filter(function(d) { return d.time == 70.0 })
+    .transition()
+    .delay(1000)
+    .duration(1000)
     .style("fill",  function (d) { return color(d.T); });
     //.attr("cx", function (d) { return x(d.x); } )
     //.attr("cy", function (d) { return y(d.y); } );
