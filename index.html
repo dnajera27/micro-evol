@@ -40,7 +40,7 @@ var filt_data = getFilteredData(data, 0.)
 	
 //Add the SVG Text Element to the svgContainer
 var annotation = svg.selectAll("annotation")
-                        .data(data)
+                        .data(filt_data)
                         .enter()
                         .append("annotation");
 
