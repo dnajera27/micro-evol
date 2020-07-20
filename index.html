@@ -57,8 +57,8 @@ var textLabels = annotation
                  .attr("font-size", "20px")
                  .attr("fill", "red");
 	
-  var color = d3.scaleSequential(d3.interpolateRainbow); //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
-    .domain([300, 1700])
+  var color = d3.scaleSequential(d3.interpolateRainbow) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
+    .domain([300, 1700]);
 
   // Add X axis
   var x = d3.scaleLinear()
