@@ -75,11 +75,10 @@ var textLabels = annotation
     .data(data)
     .enter()
     .append("circle")
-     .filter(function(d) { return d.time == 0.0 })
      .attr("cx", function (d) { return x(d.x); } )
       .attr("cy", function (d) { return y(d.y); } )
       .attr("r", 6)
-      .style("fill",  "#69b3a2");
+      .style("fill",  "gray");
 
 
   // new X axis
@@ -100,11 +99,11 @@ var textLabels = annotation
     //.attr("cy", function (d) { return y(d.y); } );
 	
 
-svg.selectAll("circle")
-    .transition()
-    .delay(20000)
-    .duration(10000)
-    .style("fill",  "#69b3a2");
+//svg.selectAll("circle")
+//    .transition()
+//    .delay(20000)
+ //   .duration(10000)
+ //   .style("fill",  "#69b3a2");
 	
 //svg.selectAll("annotation")
 //    .transition()
