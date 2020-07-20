@@ -51,8 +51,8 @@ var textLabels = annotation
                  .attr("font-size", "20px")
                  .attr("fill", "red");
 	
-  var color = d3.scaleSequential(d3.interpolateMagma) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
-    .domain([300, 1700]);
+  var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
+    .domain([1700, 300]);
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -85,8 +85,8 @@ var textLabels = annotation
 for(i=0;i<=47;i++){
   svg.selectAll("circle")
     .transition()
-    .delay(1000*(i+1))
-    .duration(1000)
+    .delay(500*(i))
+    .duration(500)
     .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
 }
   // new X axis
