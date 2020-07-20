@@ -32,7 +32,13 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 
-
+// Coerce the strings to numbers.
+data.forEach(function(d) {
+  d.x = +d.x;
+  d.y = +d.y;
+  d.T0 = +d.T0;
+  d.T1 = +d.T1;
+});
 	
 //Add the SVG Text Element to the svgContainer
 var annotation = svg.selectAll("annotation")
