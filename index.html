@@ -91,8 +91,8 @@ var textLabels = annotation
 
   svg.selectAll("circle")
     .transition()
-    .delay(function(d,i){return(10000)})
-    .duration(10000)
+    .delay(function(d,i){return(1000)})
+    .duration(1000)
     .filter(function(d) { return d.time == 70.0 })
     .style("fill",  function (d) { return color(d.T); });
     //.attr("cx", function (d) { return x(d.x); } )
