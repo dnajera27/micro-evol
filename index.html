@@ -89,11 +89,18 @@ svg.selectAll("text")
                  .attr("font-size", "20px")
                  .attr("fill", "black");
 	
-	svg.selectAll("#annotation")
+svg.selectAll("text")
 	.transition()
-	.delay(1500)
-	.attr("y", margin.top + 50)
-	.text('The red areas indicate the melt-pool as the laser moves');
+	.delay(1000)
+        .data(data)
+        .enter()
+        .append("text")
+                 .attr("x", width)
+                 .attr("y", margin.top)
+                 .text('The red areas represent the melt-pool moving as material is deposited')
+                 .attr("font-family", "sans-serif")
+                 .attr("font-size", "20px")
+                 .attr("fill", "black");
 	
   // new X axis
 // x.domain([-1, 1])
