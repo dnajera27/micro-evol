@@ -35,11 +35,6 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 var valueKey = data.columns;
 	
 
-//Add the SVG Text Element to the svgContainer
-var annotation = svg.selectAll("annotation")
-                        .data(data)
-                        .enter()
-                        .append("annotation");
 
 
   var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
@@ -82,7 +77,10 @@ for(i=0;i<=47;i++){
 }
 	
 //Add SVG Text Element Attributes
-var textLabels = annotation
+svg.selectAll("annotation")
+                 .data(data)
+                 .enter()
+                 .append("annotation")
                  .attr("x", 300)
                  .attr("y", 300)
                  .text('Thermal history during AM build')
