@@ -41,15 +41,7 @@ var annotation = svg.selectAll("annotation")
                         .enter()
                         .append("annotation");
 
-//Add SVG Text Element Attributes
-var textLabels = annotation
-                 .attr("x", 300)
-                 .attr("y", 300)
-                 .text('Thermal history during AM build')
-                 .attr("font-family", "sans-serif")
-                 .attr("font-size", "20px")
-                 .attr("fill", "black");
-	
+
   var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
     .domain([1700, 300]);
 
@@ -88,6 +80,16 @@ for(i=0;i<=47;i++){
     .duration(500)
     .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
 }
+	
+//Add SVG Text Element Attributes
+var textLabels = annotation
+                 .attr("x", 300)
+                 .attr("y", 300)
+                 .text('Thermal history during AM build')
+                 .attr("font-family", "sans-serif")
+                 .attr("font-size", "20px")
+                 .attr("fill", "black");
+	
   // new X axis
 // x.domain([-1, 1])
 //  svg.select(".myXaxis")
