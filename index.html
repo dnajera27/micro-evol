@@ -95,13 +95,13 @@ svg.selectAll("text")
         .enter()
         .append("text")
                  .attr("x", width)
-                 .attr("y", margin.top)
+                 .attr("y", margin.top + 100)
                  .text('The red areas represent the melt-pool moving as material is deposited')
                  .attr("font-family", "sans-serif")
                  .attr("font-size", "20px")
                  .attr("fill", "white");
 	
-d3.select("#annotation2")
+svg.selectAll("text").select("#annotation2")
 	.transition()
 	.delay(1000)
                  .attr("fill", "black");
