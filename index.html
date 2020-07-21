@@ -78,9 +78,10 @@ for(i=0;i<=47;i++){
 	
 //Add SVG Text Element Attributes
 svg.selectAll("text")
-                 .data(data)
-                 .enter()
-                 .append("text")
+	.attr("id", "annotation")
+        .data(data)
+        .enter()
+        .append("text")
                  .attr("x", width)
                  .attr("y", margin.top)
                  .text('This animation represents the temperature during the build of a steel cylinder')
@@ -88,7 +89,7 @@ svg.selectAll("text")
                  .attr("font-size", "20px")
                  .attr("fill", "black");
 	
-	svg.selectAll("text")
+	svg.selectAll("#annotation")
 	.transition()
 	.delay(1500)
 	.attr("y", margin.top + 50)
