@@ -77,10 +77,10 @@ for(i=0;i<=47;i++){
 }
 	
 //Add SVG Text Element Attributes
-svg.selectAll("annotation")
+svg.selectAll("text")
                  .data(data)
                  .enter()
-                 .append("annotation")
+                 .append("text")
                  .attr("x", 300)
                  .attr("y", 300)
                  .text('Thermal history during AM build')
