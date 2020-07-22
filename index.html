@@ -179,6 +179,20 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
         .y(function(d) { return y(d.Tmax) })
         );
 
+focus.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height/2)
+    .text("Time, s");
+	
+focus.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Temperature, K");
 
    var totalLength = line.node().getTotalLength();
   
