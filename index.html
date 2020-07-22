@@ -40,7 +40,7 @@ var valueKey = data.columns;
   var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
     .domain([1700, 300]);
 	
-  var cat = d3.scaleSequential(d3.schemeSet3).domain([0,7])
+  var cat = d3.schemeSet3.domain([0,7])
 
   // Add X axis
   var x = d3.scaleLinear()
