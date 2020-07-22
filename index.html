@@ -70,7 +70,7 @@ var valueKey = data.columns;
       .attr("height", 12).attr("width", 12)
       .style("fill",  function (d) { return color(d.T0); });
 
-for(i=0;i<=47;i++){
+for(i=0;i<=40;i++){
   svg.selectAll("rect")
     .transition()
     .delay(500*(i))
@@ -80,7 +80,7 @@ for(i=0;i<=47;i++){
 
   svg.selectAll("rect")
     .transition()
-    .delay(500*(47))
+    .delay(500*(41))
     .duration(5000)
     .style("fill",  function (d) { return cat(d.g); });
 	
