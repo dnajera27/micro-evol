@@ -8,7 +8,7 @@
 <body>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
-<div id="lines"></div>
+
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
@@ -26,15 +26,15 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
     var svg = d3.select("#my_dataviz")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height/2 + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
     
-    var focus = d3.select("#lines")
+    var focus = d3.select("#my_dataviz")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height/2 + margin.top + margin.bottom)
       .append("g")
         .attr("transform",
               "translate(" + width + margin.left + margin.right + "," + height/2 + margin.top + ")");
