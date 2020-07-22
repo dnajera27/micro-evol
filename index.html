@@ -39,7 +39,10 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
       .append("g")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
-    
+	
+ var ts = 250;
+	
+	
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 var valueKey = data.columns;
@@ -83,15 +86,15 @@ var valueKey = data.columns;
 for(i=0;i<=41;i++){
   svg.selectAll("rect")
     .transition()
-    .delay(500*(i))
-    .duration(500)
+    .delay(ts*(i))
+    .duration(ts)
     .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
 }
 
   svg.selectAll("rect")
     .transition()
-    .delay(500*(42))
-    .duration(5000)
+    .delay(ts*(42))
+    .duration(ts*5)
     .style("fill",  function (d) { return cat(d.g); });
 	
 //Add SVG Text Element Attributes
@@ -182,7 +185,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
        line.attr("stroke-dasharray", totalLength)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-            .duration(500*(42))
+            .duration(ts*(42))
             .attr('stroke-dashoffset', 0);
 
 	
