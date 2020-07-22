@@ -179,7 +179,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
    var totalLength = line.node().getTotalLength();
   
-       line2.attr("stroke-dasharray", totalLength)
+       line.attr("stroke-dasharray", totalLength)
         .attr("stroke-dashoffset", totalLength)
         .transition()
             .duration(2000)
