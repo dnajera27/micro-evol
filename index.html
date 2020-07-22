@@ -7,7 +7,8 @@
 </head>
 <body>
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="cylinder"></div>
+<div id="lineplot"></div>
 
 
 <!-- Load d3.js -->
@@ -23,7 +24,7 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
     width = 600,
     height = 600;
     // append the svg object to the body of the page
-    var svg = d3.select("#my_dataviz")
+    var svg = d3.select("#cylinder")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -31,13 +32,13 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
     
-    var focus = d3.select("#my_dataviz")
+    var focus = d3.select("#lineplot")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height/2 + margin.top + margin.bottom)
       .append("g")
         .attr("transform",
-              "translate(" + width + margin.left + margin.right + "," + height/2 + margin.top + ")");
+              "translate(" + margin.left + "," + margin.top + ")");
     
 //Read the data
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
