@@ -89,7 +89,7 @@ svg.selectAll("text")
                  .attr("font-size", "20px")
                  .attr("fill", "black");
 
-var annot = svg.selectAll("text")
+svg.selectAll("text")
 	.attr("id", "annotation2")
         .data(data)
         .enter()
@@ -101,10 +101,10 @@ var annot = svg.selectAll("text")
                  .attr("font-size", "20px")
                  .attr("fill", "black");
 	
-annot.transition()
-	.delay(1000)
-	.duration(1000)
-        .attr("fill", "black");
+//annot.transition()
+//	.delay(1000)
+//	.duration(1000)
+//        .attr("fill", "black");
 	
   // new X axis
 // x.domain([-1, 1])
