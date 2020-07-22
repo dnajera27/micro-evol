@@ -186,7 +186,8 @@ focus.append("text")
     .attr("y", height/2 -6)
     .text("Time, s");
 	
-focus.append("text")
+focus.attr('transform', 'translate(' + 10 + ', ' + height/2 + ')')
+    .append("text")
     .attr("class", "y label")
     .attr("text-anchor", "middle")
     .attr("y", 6)
