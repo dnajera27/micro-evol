@@ -39,6 +39,8 @@ var valueKey = data.columns;
 
   var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
     .domain([1700, 300]);
+	
+  var cat = d3.scaleSequential(d3.schemeSet3).domain([0,7])
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -75,6 +77,12 @@ for(i=0;i<=47;i++){
     .duration(500)
     .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
 }
+
+  svg.selectAll("rect")
+    .transition()
+    .delay(500*(55))
+    .duration(1000)
+    .style("fill",  function (d) { return cat(d.g); });
 	
 //Add SVG Text Element Attributes
 svg.selectAll("text")
