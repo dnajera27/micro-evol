@@ -33,9 +33,9 @@
 <script>
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 300, bottom: 30, left: 60},
-    width = 500,
-    height = 500;
+var margin = {top: 10, right: 600, bottom: 30, left: 60},
+    width = 400,
+    height = 400;
     // append the svg object to the body of the page
     var svg = d3.select("#cylinder")
       .append("svg")
@@ -146,7 +146,7 @@ svg.selectAll("text.first")
                 .attr("font-size", "20px")
                 .attr("fill", "black");
 
-svg.selectAll("text.second")
+var txt_second = svg.selectAll("text.second")
         .data(data)
         .enter()
         .append("text")
@@ -157,8 +157,7 @@ svg.selectAll("text.second")
                  .attr("font-size", "20px")
                  .attr("fill", "white");
 	
-svg.selectAll("text.second")
-	.transition()
+txt_second.transition()
 	.delay(ts*3)
 	.attr("fill", "black");
 
