@@ -168,34 +168,25 @@ var txt_3 = svg.selectAll("text.third")
                  .attr("font-size", "16px")
                  .attr("fill", "white");
 	
-var txt_4 = svg.selectAll("text.fourth")
-        .data(data)
-        .enter()
-        .append("text")
-                 .attr("x", width)
-                 .attr("y", margin.top + height + margin.bottom)
-                 .text('The line plot shows the max temperature over time')
-                 .attr("font-family", "serif")
-                 .attr("font-size", "16px")
-                 .attr("fill", "white");
+
 	
 var txt_micro = svg.selectAll("text.micro")
     .data(data)
     .enter()
      .append("text")
                .attr("x", width)
-               .attr("y", margin.top)
+               .attr("y", margin.top + 50)
                  .text('The new colors represent grain formations after solidification.')
                  .attr("font-family", "serif")
                 .attr("font-size", "16px")
                 .attr("fill", "white");
 	
 txt_2.transition()
-	.delay(ts*5)
+	.delay(ts*10)
 	.attr("fill", "black");
 
 txt_3.transition()
-	.delay(ts*10)
+	.delay(ts*20)
 	.attr("fill", "black");
 
 txt_1.transition()
@@ -292,6 +283,16 @@ focus.append("text")
             .duration(ts*(42))
             .attr('stroke-dashoffset', 0);
 
+var txt_4 = focus.selectAll("text.fourth")
+        .data(data)
+        .enter()
+        .append("text")
+                 .attr("x", width)
+                 .attr("y", margin.top + height + margin.bottom)
+                 .text('The line plot shows the max temperature over time')
+                 .attr("font-family", "serif")
+                 .attr("font-size", "16px")
+                 .attr("fill", "white");
 	
 })
 </script>
