@@ -214,10 +214,15 @@ txt_micro.transition()
 
            var imgs = svg.append("svg:image")
                 .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
-                .attr("x", width)
+                .attr("x", width + 100)
                 .attr("y", 150)
                 .attr("width", 250)
-                .attr("height", 250);
+                .attr("height", 250)
+	        .style("opacity", 0);
+	
+	imgs.transition()
+	.delay(ts*50)
+	.style("opacity", 1)
 
 })
 
