@@ -35,7 +35,7 @@ var margin = {top: 10, right: 60, bottom: 30, left: 60},
     var focus = d3.select("#lineplot")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height/2 + margin.top + margin.bottom)
+        .attr("height", height/2 + margin.top/2 + margin.bottom)
       .append("g")
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
