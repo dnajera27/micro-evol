@@ -97,7 +97,7 @@ var valueKey = data.columns;
     .append("rect")
      .attr("x", function (d) { return x(d.x); } )
       .attr("y", function (d) { return y(d.y); } )
-      .attr("height", 12).attr("width", 12)
+      .attr("height", 10).attr("width", 10)
 	.attr('pointer-events', 'none')
       .style("fill",  function (d) { return color(d.T0); })
 	.on("mouseover", function(d) {		
@@ -135,7 +135,7 @@ for(i=0;i<=41;i++){
         .attr('pointer-events', 'auto');
 	
 //Add SVG Text Element Attributes
-svg.selectAll("text.first")
+var txt_1 = svg.selectAll("text.first")
     .data(data)
     .enter()
      .append("text")
@@ -143,10 +143,10 @@ svg.selectAll("text.first")
                .attr("y", margin.top)
                  .text('The additive manufacturing of a single layer in a steel cylinder...')
                  .attr("font-family", "serif")
-                .attr("font-size", "20px")
+                .attr("font-size", "16px")
                 .attr("fill", "black");
 
-var txt_second = svg.selectAll("text.second")
+var txt_2 = svg.selectAll("text.second")
         .data(data)
         .enter()
         .append("text")
@@ -154,14 +154,65 @@ var txt_second = svg.selectAll("text.second")
                  .attr("y", margin.top + 100)
                  .text('The red areas represent the melt-pool moving as material is deposited...')
                  .attr("font-family", "serif")
-                 .attr("font-size", "20px")
+                 .attr("font-size", "16px")
                  .attr("fill", "white");
 	
-txt_second.transition()
-	.delay(ts*3)
+var txt_3 = svg.selectAll("text.third")
+        .data(data)
+        .enter()
+        .append("text")
+                 .attr("x", width)
+                 .attr("y", margin.top + 200)
+                 .text('The blue areas represent the material as it cools and solidifies...')
+                 .attr("font-family", "serif")
+                 .attr("font-size", "16px")
+                 .attr("fill", "white");
+	
+var txt_4 = svg.selectAll("text.fourth")
+        .data(data)
+        .enter()
+        .append("text")
+                 .attr("x", width)
+                 .attr("y", margin.top + height + margin.bottom)
+                 .text('The line plot shows the max temperature over time')
+                 .attr("font-family", "serif")
+                 .attr("font-size", "16px")
+                 .attr("fill", "white");
+	
+var txt_micro = svg.selectAll("text.micro")
+    .data(data)
+    .enter()
+     .append("text")
+               .attr("x", width)
+               .attr("y", margin.top)
+                 .text('The new colors represent grain formations after solidification.')
+                 .attr("font-family", "serif")
+                .attr("font-size", "16px")
+                .attr("fill", "white");
+	
+txt_2.transition()
+	.delay(ts*5)
 	.attr("fill", "black");
 
+txt_3.transition()
+	.delay(ts*10)
+	.attr("fill", "black");
+
+txt_1.transition()
+	.delay(ts*48)
+	.attr("fill", "white");
+
+txt_2.transition()
+	.delay(ts*48)
+	.attr("fill", "white");
+
+txt_3.transition()
+	.delay(ts*48)
+	.attr("fill", "white");
 	
+txt_micro.transition()
+	.delay(ts*49)
+	.attr("fill", "black");
 
 //annot.transition()
 //	.delay(1000)
