@@ -144,7 +144,7 @@ var txt_1 = svg.selectAll("text.first")
                  .text('The additive manufacturing of a single layer in a steel cylinder...')
                  .attr("font-family", "serif")
                 .attr("font-size", "16px")
-                .attr("fill", "black");
+                .attr("fill", "white");
 
 var txt_2 = svg.selectAll("text.second")
         .data(data)
@@ -180,6 +180,10 @@ var txt_micro = svg.selectAll("text.micro")
                  .attr("font-family", "serif")
                 .attr("font-size", "16px")
                 .attr("fill", "white");
+
+txt_1.transition()
+	.delay(ts*2)
+	.attr("fill", "black");
 	
 txt_2.transition()
 	.delay(ts*10)
@@ -202,7 +206,8 @@ txt_3.transition()
 	.attr("fill", "white");
 	
 txt_micro.transition()
-	.delay(ts*49)
+	.delay(ts*48)
+	.duration(ts*5)
 	.attr("fill", "black");
 
 //annot.transition()
@@ -293,7 +298,9 @@ var txt_4 = focus.selectAll("text.fourth")
                  .attr("font-family", "serif")
                  .attr("font-size", "16px")
                  .attr("fill", "white");
-	
+txt_4.transition()
+	.delay(ts*2)
+	.attr("fill", "black");	
 })
 </script>
 
