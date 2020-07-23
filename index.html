@@ -211,14 +211,14 @@ txt_micro.transition()
 	.attr("fill", "black");
 
 	
-            var imgs = svg.selectAll("image").data([0]);
+            var imgs = svg.selectAll("image");
                 imgs.enter()
                 .append("svg:img")
                 .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.jpg")
                 .attr("x", width)
                 .attr("y", margin.top + 100)
-                .attr("width", "200")
-                .attr("height", "200");
+                .attr("width", 200)
+                .attr("height", 200);
 
 })
 
