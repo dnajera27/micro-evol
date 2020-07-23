@@ -210,30 +210,16 @@ txt_micro.transition()
 	.duration(ts*5)
 	.attr("fill", "black");
 
-//annot.transition()
-//	.delay(1000)
-//	.duration(1000)
-//        .attr("fill", "black");
 	
-  // new X axis
-// x.domain([-1, 1])
-//  svg.select(".myXaxis")
-//    .transition()
-//    .duration(2000)
-//    .attr("opacity", "1")
-//    .call(d3.axisBottom(x));
+            var imgs = svg.selectAll("image").data([0]);
+                imgs.enter()
+                .append("svg:img")
+                .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.jpg")
+                .attr("x", width)
+                .attr("y", margin.top + 100)
+                .attr("width", "200")
+                .attr("height", "200");
 
-
-    //.attr("cx", function (d) { return x(d.x); } )
-    //.attr("cy", function (d) { return y(d.y); } );
-	
-//svg.selectAll("annotation")
-//    .transition()
-//    .delay(500)
-//    .duration(10000)
-//    .text('Thermal history');
-    //.attr("cx", function (d) { return x(d.x); } )
-    //.attr("cy", function (d) { return y(d.y); } );
 })
 
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function(data) {
@@ -293,7 +279,7 @@ var txt_4 = focus.selectAll("text.fourth")
         .enter()
         .append("text")
                  .attr("x", width)
-                 .attr("y", margin.top + height + margin.bottom)
+                 .attr("y", margin.top)
                  .text('The line plot shows the max temperature over time')
                  .attr("font-family", "serif")
                  .attr("font-size", "16px")
