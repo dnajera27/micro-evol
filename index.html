@@ -187,6 +187,8 @@ focus.append("text")
     .text("Time, s");
 	
 focus.append("text")
+    .append('g')
+    .attr('transform', 'translate(0, ' + height/2 + ')')
     .attr("class", "y label")
     .attr("text-anchor", "end")
     .attr("y", 6)
