@@ -252,7 +252,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .x(function(d) { return x(d.t) })
-        .y(function(d) { return y(d.Tmax) })
+        .y(function(d) { return y(d.Tmax) }))
 	.on("mouseover", function(d) {		
             div.transition()		
                 .duration(200)		
