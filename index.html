@@ -53,7 +53,7 @@ var margin = {top: 10, right: 600, bottom: 30, left: 60},
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 	
- var ts = 250;
+ var ts = 300;
 	
 // Define the div for the tooltip
 var div = d3.select("body").append("div")	
@@ -176,7 +176,18 @@ var txt_micro = svg.selectAll("text.micro")
      .append("text")
                .attr("x", width)
                .attr("y", margin.top + 50)
-                 .text('The new colors represent grain formations after solidification.')
+                 .text('The new colors represent grain formations after solidification...')
+                 .attr("font-family", "serif")
+                .attr("font-size", "16px")
+                .attr("fill", "white");
+	
+var txt_micro2 = svg.selectAll("text.micro2")
+    .data(data)
+    .enter()
+     .append("text")
+               .attr("x", width)
+               .attr("y", margin.top + 150)
+                 .text('Which can be compared to the CT scan from a real metal: ')
                  .attr("font-family", "serif")
                 .attr("font-size", "16px")
                 .attr("fill", "white");
@@ -210,7 +221,10 @@ txt_micro.transition()
 	.duration(ts*5)
 	.attr("fill", "black");
 
-	
+txt_micro.transition()
+	.delay(ts*51)
+	.duration(ts*5)
+	.attr("fill", "black");	
 
            var imgs = svg.append("svg:image")
                 .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
