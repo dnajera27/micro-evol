@@ -253,7 +253,19 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
       .attr("d", d3.line()
         .x(function(d) { return x(d.t) })
         .y(function(d) { return y(d.Tmax) })
-        );
+	.on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html("Max Temp: "  + d.Tmax)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        });
 
 focus.append("text")
     .attr("class", "x label")
@@ -292,6 +304,11 @@ txt_4.transition()
 	.delay(ts*2)
 	.attr("fill", "black");	
 })
+	
+focus.selectAll("path")
+	.transition()
+	.delay(ts*48)
+        .attr('pointer-events', 'auto');
 </script>
 
 </body>
