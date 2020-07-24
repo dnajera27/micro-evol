@@ -141,7 +141,7 @@ var txt_1 = svg.selectAll("text.first")
      .append("text")
                .attr("x", width)
                .attr("y", margin.top)
-                 .text('The additive manufacturing of a single layer in a steel cylinder...')
+                 .text('This is the simulated additive manufacturing of a single layer in a steel cylinder...')
                  .attr("font-family", "serif")
                 .attr("font-size", "16px")
                 .attr("fill", "white");
@@ -217,13 +217,13 @@ txt_3.transition()
 	.attr("fill", "white");
 	
 txt_micro.transition()
-	.delay(ts*48)
-	.duration(ts*5)
+	.delay(ts*49)
+	.duration(ts*10)
 	.attr("fill", "black");
 
 txt_micro.transition()
-	.delay(ts*51)
-	.duration(ts*5)
+	.delay(ts*59)
+	.duration(ts*10)
 	.attr("fill", "black");	
 
            var imgs = svg.append("svg:image")
