@@ -64,8 +64,8 @@ var div = d3.select("body").append("div")
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 var valueKey = data.columns;
 	
-function getFilteredData(group) {
-	return data.g.filter(function(v) { return v === group; });
+function getFilteredData(d, group) {
+	return d.g.filter(function(v) { return v === group; });
 }
 
 
@@ -265,10 +265,14 @@ focus.selectAll("rect").remove();
       .domain(xhist.domain())  // then the domain of the graphic
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
-  // And apply this function to data to get the bins
-  var bins = histogram(getFilteredData(group));
+	.data(function(d) {
+    return d.values.filter(function(v) { return v != 0; });
+})
 	
-console.log(bins.keys())
+  // And apply this function to data to get the bins
+  var bins = histogram(function(d) {return d.g.filter(function(v) { return v == group; }); });
+	
+console.log(data)
 	
   // Y axis: scale and draw:
   var yhist = d3.scaleLinear()
