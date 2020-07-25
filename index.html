@@ -258,6 +258,8 @@ function onClick(group){
 focus.selectAll("rect").remove();
 focus.selectAll("#xhist").remove()
 focus.selectAll("#yhist").remove()
+focus.selectAll("#hist_title").remove()
+focus.selectAll("#ylabel").remove()
 
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
@@ -311,6 +313,7 @@ function translate_hist(d) {
         .style("fill", "#69b3a2")
 	
 focus.append("text")
+    .attr("id", "hist_title")
     .attr("class", "x label")
     .attr("text-anchor", "end")
     .attr("x", width*2 + 50)
@@ -318,6 +321,7 @@ focus.append("text")
     .text("Grain Orientation Histogram");
 	
 focus.append("text")
+    .attr("id", "ylabel")
     .attr("class", "y label")
     .attr("text-anchor", "end")
     .attr("y", 6)
