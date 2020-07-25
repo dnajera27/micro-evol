@@ -65,7 +65,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 var valueKey = data.columns;
 	
 function getFilteredData(data, group) {
-	return data.filter(function(data) { return data.g === parseInt(group); });
+	return data.g.filter(function(v) { return v === group; });
 }
 
 
@@ -259,13 +259,14 @@ focus.selectAll("rect").remove();
       .call(d3.axisBottom(xhist));
 	
  // set the parameters for the histogram
+	
   var histogram = d3.histogram()
       .value(function(d) { return d.a; })   // I need to give the vector of value
       .domain(xhist.domain())  // then the domain of the graphic
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
   // And apply this function to data to get the bins
-  var bins = histogram(data);
+  var bins = histogram(get_filteredData(data, group));
 	
 console.log(bins.keys())
 	
