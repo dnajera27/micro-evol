@@ -112,7 +112,8 @@ var valueKey = data.columns;
             div.transition()		
                 .duration(500)		
                 .style("opacity", 0);	
-        });
+        })
+	.on("click", onClick(d);
       
 
 for(i=0;i<=41;i++){
@@ -239,7 +240,9 @@ txt_micro2.transition()
 	imgs.transition()
 	.delay(ts*69)
 	.style("opacity", 1)
-	
+
+
+function onClick(d){
 
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
@@ -284,8 +287,10 @@ function translate_hist(d) {
         .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
         .attr("height", function(d) { return height/2.0 - yhist(d.length); })
         .style("fill", "#69b3a2")
+}
 
 })
+
 
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function(data) {
 	// Now I can use this dataset:
