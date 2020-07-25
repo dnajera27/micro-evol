@@ -314,7 +314,7 @@ focus.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
     .attr("x", width*2 + 50)
-    .attr("y", 20)
+    .attr("y", 5)
     .text("Grain Orientation Histogram");
 	
 focus.append("text")
@@ -322,7 +322,7 @@ focus.append("text")
     .attr("text-anchor", "end")
     .attr("y", 6)
     .attr("dy", ".75em")
-    .attr("transform", "translate(" + eval(width + 50) + "rotate(-90)")
+    .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
     .text("Orientation, degrees    ");
 }
 	
@@ -389,7 +389,6 @@ var txt_4 = focus.selectAll("text.fourth")
                  .attr("x", width/2-20)
                  .attr("y", margin.top)
                  .text('Max temperature over time')
-                 .attr("font-family", "serif")
                  .attr("font-size", "16px")
                  .attr("fill", "white");
 txt_4.transition()
