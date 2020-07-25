@@ -263,7 +263,7 @@ txt_micro2.transition()
   // Y axis: scale and draw:
   var yhist = d3.scaleLinear()
       .range([height/2, 0]);
-      y.domain([0, 70]); d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+      y.domain([0, 70]); //d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 	
   focus.append("g")
 	.attr("transform", "translate(" + eval(width + 50) + ")")
