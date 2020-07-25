@@ -64,7 +64,7 @@ var div = d3.select("body").append("div")
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 var valueKey = data.columns;
 	
-function getFilteredData(data, group) {
+function getFilteredData(group) {
 	return data.g.filter(function(v) { return v === group; });
 }
 
@@ -266,7 +266,7 @@ focus.selectAll("rect").remove();
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
   // And apply this function to data to get the bins
-  var bins = histogram(getFilteredData(data, group));
+  var bins = histogram(getFilteredData(group));
 	
 console.log(bins.keys())
 	
