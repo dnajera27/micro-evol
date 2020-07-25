@@ -64,7 +64,9 @@ var div = d3.select("body").append("div")
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
 var valueKey = data.columns;
 	
-
+function getFilteredData(data, group) {
+	return data.filter(function(data) { return data.g === parseInt(group); });
+}
 
 
   var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
@@ -113,7 +115,9 @@ var valueKey = data.columns;
                 .duration(500)		
                 .style("opacity", 0);	
         })
-	.on("click", onClick());
+	.on("click", function (d) {
+	  onClick(getFilteredData(d, d.g)) 
+  });
       
 
 for(i=0;i<=41;i++){
@@ -242,7 +246,7 @@ txt_micro2.transition()
 	.style("opacity", 1)
 
 
-function onClick(d){
+function onClick(filt_data){
 
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
@@ -259,9 +263,8 @@ function onClick(d){
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
   // And apply this function to data to get the bins
-  var bins = histogram(data);
+  var bins = histogram(filt_data);
 	
-	console.log(bins)
 
   // Y axis: scale and draw:
   var yhist = d3.scaleLinear()
