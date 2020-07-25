@@ -246,7 +246,7 @@ txt_micro2.transition()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
   focus.append("g")
-      .attr("transform", "translate(0," + height/2 + ")")
+      .attr("transform", "translate(" + eval(width + 10) + "," + height/2 + ")")
       .call(d3.axisBottom(xhist));
 	
  // set the parameters for the histogram
@@ -258,7 +258,7 @@ txt_micro2.transition()
   // And apply this function to data to get the bins
   var bins = histogram(data);
 	
-	log.console(bins)
+	console.log(bins)
 
   // Y axis: scale and draw:
   var yhist = d3.scaleLinear()
@@ -266,7 +266,7 @@ txt_micro2.transition()
       y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 	
   focus.append("g")
-	.attr("transform", "translate(" + width + ")")
+	.attr("transform", "translate(" + eval(width + 10) + ")")
       .call(d3.axisLeft(yhist));
 
 function translate_hist(d) {
