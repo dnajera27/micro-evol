@@ -116,7 +116,7 @@ function getFilteredData(data, group) {
                 .style("opacity", 0);	
         })
 	.on("click", function (d) {
-	  onClick(getFilteredData(d, d.g)) 
+	  onClick(d, d.g)
   });
       
 
@@ -246,7 +246,7 @@ txt_micro2.transition()
 	.style("opacity", 1)
 
 
-function onClick(filt_data){
+function onClick(data, group){
 
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
@@ -263,7 +263,7 @@ function onClick(filt_data){
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
   // And apply this function to data to get the bins
-  var bins = histogram(filt_data);
+  var bins = histogram(data);
 	
 
   // Y axis: scale and draw:
@@ -284,6 +284,7 @@ function translate_hist(d) {
   focus.selectAll("rect")
       .data(bins)
       .enter()
+	.filter(function(d) { return d.g = group;})
       .append("rect")
         .attr("x", 1)
         .attr("transform", function(d) { return translate_hist(d); })
