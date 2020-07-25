@@ -267,7 +267,8 @@ focus.selectAll("rect").remove();
   // And apply this function to data to get the bins
   var bins = histogram(data);
 	
-
+console.log(bins.keys())
+	
   // Y axis: scale and draw:
   var yhist = d3.scaleLinear()
       .range([height/2, 0]);
