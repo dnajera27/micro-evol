@@ -309,7 +309,6 @@ function translate_hist(d) {
         .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
         .attr("height", function(d) { return height/2.0 - yhist(d.length); })
         .style("fill", "#69b3a2")
-}
 	
 focus.append("text")
     .attr("class", "x label")
@@ -321,11 +320,13 @@ focus.append("text")
 focus.append("text")
     .attr("class", "y label")
     .attr("text-anchor", "end")
-    .attr("x", width + 50)
     .attr("y", 6)
     .attr("dy", ".75em")
-    .attr("transform", "rotate(-90)")
+    .attr("transform", "translate(" + eval(width + 50) + "rotate(-90)")
     .text("Orientation, degrees    ");
+}
+	
+
 
 })
 
