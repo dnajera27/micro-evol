@@ -240,6 +240,14 @@ txt_micro2.transition()
 	.delay(ts*69)
 	.style("opacity", 1)
 	
+
+  // X axis: scale and draw:
+  var xhist = d3.scaleLinear()
+      .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+      .range([0, width]);
+  svg.append("g")
+      .attr("transform", "translate(0," + height/2 + ")")
+      .call(d3.axisBottom(xhist));
 	
  // set the parameters for the histogram
   var histogram = d3.histogram()
@@ -254,6 +262,7 @@ txt_micro2.transition()
   var yhist = d3.scaleLinear()
       .range([height/2, 0]);
       y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+	
   focus.append("g")
 	.attr("transform", "translate(" + width + ")")
       .call(d3.axisLeft(yhist));
@@ -264,9 +273,9 @@ txt_micro2.transition()
       .enter()
       .append("rect")
         .attr("x", 1)
-        .attr("transform", function(d) { return "translate(" + width + x(d.x0) + "," + y(d.length) + ")"; })
-        .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
-        .attr("height", function(d) { return height - y(d.length); })
+        .attr("transform", function(d) { return "translate(" + width + xhist(d.x0) + "," + yhist(d.length) + ")"; })
+        .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
+        .attr("height", function(d) { return height - yhist(d.length); })
         .style("fill", "#69b3a2")
 
 })
