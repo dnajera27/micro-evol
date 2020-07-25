@@ -245,7 +245,7 @@ txt_micro2.transition()
   var xhist = d3.scaleLinear()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
-  svg.append("g")
+  focus.append("g")
       .attr("transform", "translate(0," + height/2 + ")")
       .call(d3.axisBottom(xhist));
 	
@@ -273,7 +273,7 @@ txt_micro2.transition()
       .enter()
       .append("rect")
         .attr("x", 1)
-        .attr("transform", function(d) { return "translate(" + xhist(d.x0) + "," + yhist(d.length) + ")"; })
+        .attr("transform", function(d) { return "translate(" + function() { return width + 10+ xhist(d.x0); } + "," + yhist(d.length) + ")"; })
         .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
         .attr("height", function(d) { return height/2 - yhist(d.length); })
         .style("fill", "#69b3a2")
