@@ -106,7 +106,7 @@ function getFilteredData(data, group) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
-            div	.html("Grain Orientation: "  + d.a)	
+            div	.html("Grain Orientation: "  + Math.round(d.a))	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             })					
@@ -248,7 +248,8 @@ txt_micro2.transition()
 
 function onClick(group){
 
-	console.log(group)
+focus.selectAll("rect").remove();
+
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
