@@ -267,13 +267,17 @@ txt_micro2.transition()
 	.attr("transform", "translate(" + width + ")")
       .call(d3.axisLeft(yhist));
 
+function translate_hist(d) {
+  return "translate(" + width + 10 + xhist(d.x0) + "," + yhist(d.length) + ")";
+}
+	
   // append the bar rectangles to the svg element
   focus.selectAll("rect")
       .data(bins)
       .enter()
       .append("rect")
         .attr("x", 1)
-        .attr("transform", function(d) { return "translate(" + function() { return width + 10+ xhist(d.x0); } + "," + yhist(d.length) + ")"; })
+        .attr("transform", function(d) { return translate_hist(d); })
         .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
         .attr("height", function(d) { return height/2 - yhist(d.length); })
         .style("fill", "#69b3a2")
