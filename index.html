@@ -246,15 +246,25 @@ txt_micro2.transition()
 	.style("opacity", 1)
 
 
+  // Y axis: scale and draw:
+  var yhist = d3.scaleLinear()
+      .range([height/2, 0]);
+	
+      yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
+	
+	
 function onClick(group){
 
 focus.selectAll("rect").remove();
+focus.selectAll("#xhist").remove()
+focus.selectAll("#yhist").remove()
 
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
   focus.append("g")
+	.attr("id", "xhist")
       .attr("transform", "translate(" + eval(width + 50) + "," + height/2 + ")")
       .call(d3.axisBottom(xhist));
 	
@@ -280,6 +290,7 @@ console.log(filt_data)
       yhist.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
 	
   focus.append("g")
+	.attr("id", "yhist")
 	.attr("transform", "translate(" + eval(width + 50) + ")")
       .call(d3.axisLeft(yhist));
 
