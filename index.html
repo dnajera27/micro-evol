@@ -265,9 +265,7 @@ focus.selectAll("rect").remove();
       .domain(xhist.domain())  // then the domain of the graphic
       .thresholds(xhist.ticks(30)); // then the numbers of bins
 
-	.data(function(d) {
-    return d.values.filter(function(v) { return v != 0; });
-})
+
 	
   // And apply this function to data to get the bins
   var bins = histogram(function(d) {return d.g.filter(function(v) { return v == group; }); });
