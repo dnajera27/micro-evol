@@ -116,7 +116,7 @@ function getFilteredData(data, group) {
                 .style("opacity", 0);	
         })
 	.on("click", function (d) {
-	  onClick(d, d.g)
+	  onClick(d.g)
   });
       
 
@@ -246,8 +246,9 @@ txt_micro2.transition()
 	.style("opacity", 1)
 
 
-function onClick(data, group){
+function onClick(group){
 
+	console.log(group)
   // X axis: scale and draw:
   var xhist = d3.scaleLinear()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
