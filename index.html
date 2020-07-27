@@ -468,7 +468,8 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
             .attr("x", 20)
             .attr("y", height / 2 - 30)
             .text("The max temperature is always above the melting temperature (1615 K)")
-            .attr("fill", "white");
+            .attr("fill", "white")
+	    .attr("font-size", "12px");
     
         temp_annot.transition()
             .delay(ts * 40)
@@ -484,10 +485,30 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
 function goToExplore(){
 
+        svg.selectAll("text")
+            .attr("fill", "white")
     button1()
+	
+	
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
     svg.selectAll("rect").attr('pointer-events', 'auto');
+	   
+    var txt_3 = svg.selectAll("text.third")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("x", width + 10)
+        .attr("y", margin.top + 100)
+        .text('Click on the grains to visualize the grain orientation distribution.')
+        .attr("font-family", "serif")
+        .attr("font-size", "16px")
+        .attr("fill", "white");
+
+
+    txt_3.transition()
+        .delay(ts * 2)
+        .attr("fill", "black");
 	    
 })
 }
