@@ -399,6 +399,19 @@ txt_4.transition()
 	.delay(ts*7)
 	.duration(ts*5)
 	.attr("fill", "black");	
+	
+var temp_annot = focus.append("text")
+    .attr("class", "annot")
+    .attr("x", width/2)
+    .attr("y", height/2 -10)
+    .text("The max temperature is always above the melting temperature (1615 K)")
+    .attr("fill", "white");
+
+temp_annot.transition()
+	.delay(ts*40)
+	.duration(ts*5)
+	.attr("fill", "blue");	
+	
 })
 	
 
