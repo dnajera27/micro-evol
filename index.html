@@ -108,7 +108,10 @@ setTimeout(function() {
 }
 
 function pre_goToAM(){
-
+document.getElementById("amButton").disabled = true;
+document.getElementById("microButton").disabled = true;
+document.getElementById("exploreButton").disabled = true;
+	
 	svg.selectAll("*").remove();
         focus.selectAll("*").remove();
 
@@ -575,6 +578,11 @@ function goToExplore(){
 
         svg.selectAll("text")
             .attr("fill", "white")
+	
+	mark2.remove()
+	arr1.remove()
+	arr2.remove()
+	
     button1()
 	
 	
