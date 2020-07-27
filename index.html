@@ -126,6 +126,7 @@ function goToMicro() {
 
 
         var imgs = svg.append("svg:image")
+	    .attr("id", "micro_img")
             .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
             .attr("x", width + 100)
             .attr("y", 150)
@@ -193,7 +194,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
         svg.selectAll("text")
             .attr("fill", "white")
 	
-	svg.selectAll("svg:image")
+	svg.selectAll("#micro_img")
 	.style("opacity", 0)
 
     function getFilteredData(d, group) {
