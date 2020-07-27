@@ -493,7 +493,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
 	   var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 	    
-  focus
+  var mark = focus
     .append('defs')
     .append('marker')
     .attr('id', 'arrow')
@@ -505,16 +505,21 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
     .attr('orient', 'auto-start-reverse')
     .append('path')
     .attr('d', d3.line()(arrowPoints))
-    .attr('stroke', 'black');
+    .attr('stroke', 'white');
 
   var arr = focus
     .append('path')
-    .attr('d', d3.line()([[30,height / 2 - 25], [35, height/2*0.6]]))
+    .attr('d', d3.line()([[40,height / 2 - 35], [50, height/2*0.3]]))
     .attr('stroke', 'white')
     .attr('marker-end', 'url(#arrow)')
     .attr('fill', 'none');
    
         arr.transition()
+            .delay(ts * 40)
+            .duration(ts * 5)
+            .attr("stroke", "black");
+	    
+	            mark.transition()
             .delay(ts * 40)
             .duration(ts * 5)
             .attr("stroke", "black");
