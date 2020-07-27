@@ -109,12 +109,9 @@ setTimeout(function() {
 
 function pre_goToAM(){
 
-        focus.selectAll("rect").remove();
-        focus.selectAll("#xhist").remove()
-        focus.selectAll("#yhist").remove()
-        focus.selectAll("#hist_title").remove()
-        focus.selectAll("#ylabel").remove()
-	
+	svg.selectAll("*").remove();
+        focus.selectAll("*").remove();
+
 	goToAM()
 }
 	
