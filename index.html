@@ -7,11 +7,23 @@
 </head>
 <body>
 <!-- Create a div where the graph will take place -->
-<div id="option">
+<div id="option1">
+<input name="amButton" 
+           type="button" 
+           value="1. AM Build" 
+           onclick="goToAM()" />
+</div>
+<div id="option2">
 <input name="microButton" 
            type="button" 
            value="Microstructure" 
            onclick="goToMicro()" />
+</div>
+<div id="option3">
+<input name="exploreButton" 
+           type="button" 
+           value="Explore" 
+           onclick="goToExplore()" />
 </div>
 <div id="cylinder"></div>
 <div id="lineplot"></div>
@@ -38,407 +50,415 @@
 	
 <script>
 
+goToAM()
+	
 	
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 600, bottom: 30, left: 60},
+var margin = { top: 10, right: 600, bottom: 30, left: 60 },
     width = 400,
     height = 400;
-    // append the svg object to the body of the page
-    var svg = d3.select("#cylinder")
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")");
-    
-    var focus = d3.select("#lineplot")
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height/2 + margin.top/2 + margin.bottom)
-      .append("g")
-        .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")");
-	
- var ts = 300;
-	
+// append the svg object to the body of the page
+var svg = d3.select("#cylinder")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+var focus = d3.select("#lineplot")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height / 2 + margin.top / 2 + margin.bottom)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+var ts = 300;
+
 // Define the div for the tooltip
-var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-    .style("opacity", 0);	
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
-  var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
+var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
     .domain([1700, 300]);
-	
-  var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
-	
+
+var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
+
 //Read the data
-	
-
-function goToMicro(){
-	d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
-
-  svg.selectAll("rect")
-    .transition()
-    .delay(ts*(42))
-    .duration(ts*5)
-    .style("fill",  function (d) { return cat(d.g); });
 
 
-           var imgs = svg.append("svg:image")
-                .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
-                .attr("x", width + 100)
-                .attr("y", 150)
-                .attr("width", 250)
-                .attr("height", 250)
-	        .style("opacity", 0);
-		
-		imgs.transition()
-	.delay(ts*69)
-	.style("opacity", 1)
+function goToMicro() {
+    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
-	
-var txt_micro = svg.selectAll("text.micro")
-    .data(data)
-    .enter()
-     .append("text")
-               .attr("x", width + 10)
-               .attr("y", margin.top + 50)
-                 .text('The new colors represent grain formations after solidification...')
-                 .attr("font-family", "serif")
-                .attr("font-size", "16px")
-                .attr("fill", "white");
-	
-var txt_micro2 = svg.selectAll("text.micro2")
-    .data(data)
-    .enter()
-     .append("text")
-               .attr("x", width + 10)
-               .attr("y", margin.top + 150)
-                 .text('Which can be compared to the CT scan from a real metal: ')
-                 .attr("font-family", "serif")
-                .attr("font-size", "16px")
-                .attr("fill", "white");
+        svg.selectAll("text")
+            .attr("fill", "white")
 
-	txt_micro.transition()
-	.delay(ts*49)
-	.duration(ts*10)
-	.attr("fill", "black");
+        svg.selectAll("rect")
+            .transition()
+            .delay(ts * (2))
+            .duration(ts * 5)
+            .style("fill", function (d) { return cat(d.g); });
 
-txt_micro2.transition()
-	.delay(ts*59)
-	.duration(ts*10)
-	.attr("fill", "black");	
-	})
-		
-}
-	
-d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function(data) {
-var valueKey = data.columns;
-	
-function getFilteredData(d, group) {
-	return d.g.filter(function(v) { return v === group; });
+
+        var imgs = svg.append("svg:image")
+            .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
+            .attr("x", width + 100)
+            .attr("y", 150)
+            .attr("width", 250)
+            .attr("height", 250)
+            .style("opacity", 0);
+
+        imgs.transition()
+            .delay(ts * 8)
+            .style("opacity", 1)
+
+
+        var txt_micro = svg.selectAll("text.micro")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top + 50)
+            .text('The new colors represent grain formations after solidification...')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+
+        var txt_micro2 = svg.selectAll("text.micro2")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top + 150)
+            .text('Which can be compared to the CT scan from a real metal: ')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+
+        txt_micro.transition()
+            .delay(ts * 16)
+            .duration(ts * 10)
+            .attr("fill", "black");
+
+        txt_micro2.transition()
+            .delay(ts * 24)
+            .duration(ts * 10)
+            .attr("fill", "black");
+    })
+
 }
 
+function goToAM(){
+
+d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
+    var valueKey = data.columns;
+
+    function getFilteredData(d, group) {
+        return d.g.filter(function (v) { return v === group; });
+    }
 
 
-
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([-0.004, 0.004])
-    .range([ 0, width ]);
-	
-  svg.append("g")
-    .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([-0.004, 0.004])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
-
-  // Add dots
-  svg.append('g')
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("rect")
-     .attr("x", function (d) { return x(d.x); } )
-      .attr("y", function (d) { return y(d.y); } )
-      .attr("height", 10).attr("width", 10)
-	.attr('pointer-events', 'none')
-      .style("fill",  function (d) { return color(d.T0); })
-	.on("mouseover", function(d) {		
-            div.transition()		
-                .duration(200)		
-                .style("opacity", .9);		
-            div	.html("Grain Orientation: "  + Math.round(d.a))	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-            })					
-        .on("mouseout", function(d) {		
-            div.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-        })
-	.on("click", function (d) {
-	  onClick(d.g)
-  });
-      
-
-for(i=0;i<=41;i++){
-  svg.selectAll("rect")
-    .transition()
-    .delay(ts*(i))
-    .duration(ts)
-    .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
-}
-
-
-
-  svg.selectAll("rect")
-	.transition()
-	.delay(ts*48)
-        .attr('pointer-events', 'auto');
-	
-//Add SVG Text Element Attributes
-var txt_1 = svg.selectAll("text.first")
-    .data(data)
-    .enter()
-     .append("text")
-               .attr("x", width + 10)
-               .attr("y", margin.top)
-                 .text('This is the simulated additive manufacturing of a single layer in a steel cylinder...')
-                 .attr("font-family", "serif")
-                .attr("font-size", "16px")
-                .attr("fill", "white");
-
-var txt_2 = svg.selectAll("text.second")
-        .data(data)
-        .enter()
-        .append("text")
-                 .attr("x", width + 10)
-                 .attr("y", margin.top + 100)
-                 .text('The red areas represent the melt-pool moving as material is deposited...')
-                 .attr("font-family", "serif")
-                 .attr("font-size", "16px")
-                 .attr("fill", "white");
-	
-var txt_3 = svg.selectAll("text.third")
-        .data(data)
-        .enter()
-        .append("text")
-                 .attr("x", width + 10)
-                 .attr("y", margin.top + 200)
-                 .text('The blue areas represent the material as it cools and solidifies...')
-                 .attr("font-family", "serif")
-                 .attr("font-size", "16px")
-                 .attr("fill", "white");
-	
-
-	
-
-
-txt_1.transition()
-	.delay(ts*2)
-	.attr("fill", "black");
-	
-txt_2.transition()
-	.delay(ts*16)
-	.duration(ts*5)
-	.attr("fill", "black");
-
-txt_3.transition()
-	.delay(ts*31)
-	.duration(ts*5)
-	.attr("fill", "black");
-
-txt_1.transition()
-	.delay(ts*48)
-	.attr("fill", "white");
-
-txt_2.transition()
-	.delay(ts*48)
-	.attr("fill", "white");
-
-txt_3.transition()
-	.delay(ts*48)
-	.attr("fill", "white");
-	
-
-
-
-
-  // Y axis: scale and draw:
-  var yhist = d3.scaleLinear()
-      .range([height/2, 0]);
-	
-      yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
-	
-	
-function onClick(group){
-
-focus.selectAll("rect").remove();
-focus.selectAll("#xhist").remove()
-focus.selectAll("#yhist").remove()
-focus.selectAll("#hist_title").remove()
-focus.selectAll("#ylabel").remove()
-
-  // X axis: scale and draw:
-  var xhist = d3.scaleLinear()
-      .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-      .range([0, width]);
-  focus.append("g")
-	.attr("id", "xhist")
-      .attr("transform", "translate(" + eval(width + 50) + "," + height/2 + ")")
-      .call(d3.axisBottom(xhist));
-	
- // set the parameters for the histogram
-	
-  var histogram = d3.histogram()
-      .value(function(d) { return d.a; })   // I need to give the vector of value
-      .domain(xhist.domain())  // then the domain of the graphic
-      .thresholds(xhist.ticks(30)); // then the numbers of bins
-
-var filt_data = data.filter(function(d) {return d.g == group;}) 
-
-console.log(filt_data)
-	
-  // And apply this function to data to get the bins
-  var bins = histogram(filt_data);
-
-	
-  // Y axis: scale and draw:
-  var yhist = d3.scaleLinear()
-      .range([height/2, 0]);
-	
-      yhist.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
-	
-  focus.append("g")
-	.attr("id", "yhist")
-	.attr("transform", "translate(" + eval(width + 50) + ")")
-      .call(d3.axisLeft(yhist));
-
-function translate_hist(d) {
-  return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
-}
-	
-  // append the bar rectangles to the svg element
-  focus.selectAll("rect")
-      .data(bins)
-      .enter()
-	.filter(function(d) { return d.g = group;})
-      .append("rect")
-        .attr("x", 1)
-        .attr("transform", function(d) { return translate_hist(d); })
-        .attr("width", function(d) { return xhist(d.x1) - xhist(d.x0) -1 ; })
-        .attr("height", function(d) { return height/2.0 - yhist(d.length); })
-        .style("fill", "#69b3a2")
-	
-focus.append("text")
-    .attr("id", "hist_title")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width*2 + 50)
-    .attr("y", 5)
-    .text("Grain Orientation Histogram");
-	
-focus.append("text")
-    .attr("id", "ylabel")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".75em")
-    .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
-    .text("Orientation, degrees    ");
-}
-	
-
-
-})
-
-
-d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function(data) {
-	// Now I can use this dataset:
-
-    // Add X axis --> it is a date format
+    // Add X axis
     var x = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.t; })])
-      .range([ 0, width ]);
-    focus.append("g")
-      .attr("transform", "translate(0," + height/2 + ")")
-      .call(d3.axisBottom(x));
+        .domain([-0.004, 0.004])
+        .range([0, width]);
+
+    svg.append("g")
+        .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.Tmax; })])
-      .range([ height/2, 0 ]);
-    focus.append("g")
-      .call(d3.axisLeft(y));
+        .domain([-0.004, 0.004])
+        .range([height, 0]);
+    svg.append("g")
+        .call(d3.axisLeft(y));
 
-    // Add the line
-  var line =  focus.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.t) })
-        .y(function(d) { return y(d.Tmax) }));
+    // Add dots
+    svg.append('g')
+        .selectAll("dot")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function (d) { return x(d.x); })
+        .attr("y", function (d) { return y(d.y); })
+        .attr("height", 10).attr("width", 10)
+        .attr('pointer-events', 'none')
+        .style("fill", function (d) { return color(d.T0); })
+        .on("mouseover", function (d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html("Grain Orientation: " + Math.round(d.a))
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function (d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        })
+        .on("click", function (d) {
+            onClick(d.g)
+        });
 
-focus.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height/2 -6)
-    .text("Time, s");
-	
-focus.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".75em")
-    .attr("transform", "rotate(-90)")
-    .text("Temperature, K    ");
 
-   var totalLength = line.node().getTotalLength();
-  
-       line.attr("stroke-dasharray", totalLength)
-        .attr("stroke-dashoffset", totalLength)
+    for (i = 0; i <= 42; i++) {
+        svg.selectAll("rect")
+            .transition()
+            .delay(ts * (i))
+            .duration(ts)
+            .style("fill", function (d) { return color(d[valueKey[i + 2]]); });
+    }
+
+
+    svg.selectAll("rect")
         .transition()
-            .duration(ts*(42))
-            .attr('stroke-dashoffset', 0);
+        .delay(ts * 48)
+        .attr('pointer-events', 'auto');
 
-var txt_4 = focus.selectAll("text.fourth")
+    //Add SVG Text Element Attributes
+    var txt_1 = svg.selectAll("text.first")
         .data(data)
         .enter()
         .append("text")
-                 .attr("x", width/2-20)
-                 .attr("y", margin.top)
-                 .text('Max temperature over time')
-                 .attr("font-size", "16px")
-                 .attr("fill", "white");
-txt_4.transition()
-	.delay(ts*7)
-	.duration(ts*5)
-	.attr("fill", "black");	
-	
-var temp_annot = focus.append("text")
-    .attr("class", "annot")
-    .attr("x", 20)
-    .attr("y", height/2 - 30)
-    .text("The max temperature is always above the melting temperature (1615 K)")
-    .attr("fill", "white");
+        .attr("x", width + 10)
+        .attr("y", margin.top)
+        .text('This is the simulated additive manufacturing of a single layer in a steel cylinder...')
+        .attr("font-family", "serif")
+        .attr("font-size", "16px")
+        .attr("fill", "white");
 
-temp_annot.transition()
-	.delay(ts*40)
-	.duration(ts*5)
-	.attr("fill", "blue");	
-	
+    var txt_2 = svg.selectAll("text.second")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("x", width + 10)
+        .attr("y", margin.top + 100)
+        .text('The red areas represent the melt-pool moving as material is deposited...')
+        .attr("font-family", "serif")
+        .attr("font-size", "16px")
+        .attr("fill", "white");
+
+    var txt_3 = svg.selectAll("text.third")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("x", width + 10)
+        .attr("y", margin.top + 200)
+        .text('The blue areas represent the material as it cools and solidifies...')
+        .attr("font-family", "serif")
+        .attr("font-size", "16px")
+        .attr("fill", "white");
+
+
+    txt_1.transition()
+        .delay(ts * 2)
+        .attr("fill", "black");
+
+    txt_2.transition()
+        .delay(ts * 16)
+        .duration(ts * 5)
+        .attr("fill", "black");
+
+    txt_3.transition()
+        .delay(ts * 31)
+        .duration(ts * 5)
+        .attr("fill", "black");
+
+    // txt_1.transition()
+    //     .delay(ts * 48)
+    //     .attr("fill", "white");
+
+    // txt_2.transition()
+    //     .delay(ts * 48)
+    //     .attr("fill", "white");
+
+    // txt_3.transition()
+    //     .delay(ts * 48)
+    //     .attr("fill", "white");
+
 })
+
+    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function (data) {
+        // Now I can use this dataset:
+    
+        // Add X axis --> it is a date format
+        var x = d3.scaleLinear()
+            .domain([0, d3.max(data, function (d) { return +d.t; })])
+            .range([0, width]);
+        focus.append("g")
+            .attr("transform", "translate(0," + height / 2 + ")")
+            .call(d3.axisBottom(x));
+    
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function (d) { return +d.Tmax; })])
+            .range([height / 2, 0]);
+        focus.append("g")
+            .call(d3.axisLeft(y));
+    
+        // Add the line
+        var line = focus.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function (d) { return x(d.t) })
+                .y(function (d) { return y(d.Tmax) }));
+    
+        focus.append("text")
+            .attr("class", "x label")
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height / 2 - 6)
+            .text("Time, s");
+    
+        focus.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "end")
+            .attr("y", 6)
+            .attr("dy", ".75em")
+            .attr("transform", "rotate(-90)")
+            .text("Temperature, K    ");
+    
+        var totalLength = line.node().getTotalLength();
+    
+        line.attr("stroke-dasharray", totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(ts * (42))
+            .attr('stroke-dashoffset', 0);
+    
+        var txt_4 = focus.selectAll("text.fourth")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width / 2 - 20)
+            .attr("y", margin.top)
+            .text('Max temperature over time')
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+        txt_4.transition()
+            .delay(ts * 7)
+            .duration(ts * 5)
+            .attr("fill", "black");
+    
+        var temp_annot = focus.append("text")
+            .attr("class", "annot")
+            .attr("x", 20)
+            .attr("y", height / 2 - 30)
+            .text("The max temperature is always above the melting temperature (1615 K)")
+            .attr("fill", "white");
+    
+        temp_annot.transition()
+            .delay(ts * 40)
+            .duration(ts * 5)
+            .attr("fill", "blue");
+    
+    })
+
+
+}
+
+function goToExplore(){
+
+    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
+
+    // Y axis: scale and draw:
+    var yhist = d3.scaleLinear()
+        .range([height / 2, 0]);
+
+    yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
+
+
+    function onClick(group) {
+
+        focus.selectAll("rect").remove();
+        focus.selectAll("#xhist").remove()
+        focus.selectAll("#yhist").remove()
+        focus.selectAll("#hist_title").remove()
+        focus.selectAll("#ylabel").remove()
+
+        // X axis: scale and draw:
+        var xhist = d3.scaleLinear()
+            .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+            .range([0, width]);
+        focus.append("g")
+            .attr("id", "xhist")
+            .attr("transform", "translate(" + eval(width + 50) + "," + height / 2 + ")")
+            .call(d3.axisBottom(xhist));
+
+        // set the parameters for the histogram
+
+        var histogram = d3.histogram()
+            .value(function (d) { return d.a; })   // I need to give the vector of value
+            .domain(xhist.domain())  // then the domain of the graphic
+            .thresholds(xhist.ticks(30)); // then the numbers of bins
+
+        var filt_data = data.filter(function (d) { return d.g == group; })
+
+        console.log(filt_data)
+
+        // And apply this function to data to get the bins
+        var bins = histogram(filt_data);
+
+
+        // Y axis: scale and draw:
+        var yhist = d3.scaleLinear()
+            .range([height / 2, 0]);
+
+        yhist.domain([0, d3.max(bins, function (d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+
+        focus.append("g")
+            .attr("id", "yhist")
+            .attr("transform", "translate(" + eval(width + 50) + ")")
+            .call(d3.axisLeft(yhist));
+
+        function translate_hist(d) {
+            return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
+        }
+
+        // append the bar rectangles to the svg element
+        focus.selectAll("rect")
+            .data(bins)
+            .enter()
+            .filter(function (d) { return d.g = group; })
+            .append("rect")
+            .attr("x", 1)
+            .attr("transform", function (d) { return translate_hist(d); })
+            .attr("width", function (d) { return xhist(d.x1) - xhist(d.x0) - 1; })
+            .attr("height", function (d) { return height / 2.0 - yhist(d.length); })
+            .style("fill", "#69b3a2")
+
+        focus.append("text")
+            .attr("id", "hist_title")
+            .attr("class", "x label")
+            .attr("text-anchor", "end")
+            .attr("x", width * 2 + 50)
+            .attr("y", 5)
+            .text("Grain Orientation Histogram");
+
+        focus.append("text")
+            .attr("id", "ylabel")
+            .attr("class", "y label")
+            .attr("text-anchor", "end")
+            .attr("y", 6)
+            .attr("dy", ".75em")
+            .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
+            .text("Orientation, degrees    ");
+    }
+
+
+
+})
+}
+
+
 	
 
 	
