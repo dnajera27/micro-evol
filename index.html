@@ -90,9 +90,9 @@ var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
 //Read the data
 
 function button1(){
-document.getElementById("option1").disabled = true;
-setTimeOut(function() {
-	document.getElementById("button1").disabled = false;}, ts*42);
+document.getElementByName("amButton").disabled = true;
+setTimeout(function() {
+	document.getElementById("amButton").disabled = false;}, ts*42);
 }
 
 function goToMicro() {
