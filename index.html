@@ -7,6 +7,12 @@
 </head>
 <body>
 <!-- Create a div where the graph will take place -->
+<div id="option">
+<input name="microButton" 
+           type="button" 
+           value="Microstructure" 
+           onclick="goToMicro()" />
+</div>
 <div id="cylinder"></div>
 <div id="lineplot"></div>
 
@@ -29,10 +35,6 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.js"></script>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
-
-<button type="button" onclick="goToMicro()">Microstructure</button>
-	
-<button type="button" onclick="goToExplore()">Explore</button>	
 	
 <script>
 
@@ -241,7 +243,7 @@ txt_3.transition()
 	
       yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
 
-var goToMicro = function(){
+function goToMicro(){
 
   svg.selectAll("rect")
     .transition()
