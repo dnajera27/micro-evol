@@ -509,13 +509,15 @@ function goToExplore(){
         .attr("font-size", "16px")
         .attr("fill", "white");
 
+var arrowPoints = [[0, 0], [0, 20], [20, 10]];
+	    
   svg
     .append('defs')
     .append('marker')
     .attr('id', 'arrow')
-    .attr('viewBox', [0, 0, 10, 10])
-    .attr('refX', 5)
-    .attr('refY', 5)
+    .attr('viewBox', [0, 0, 20, 20])
+    .attr('refX', 10)
+    .attr('refY', 10)
     .attr('markerWidth', 5)
     .attr('markerHeight', 5)
     .attr('orient', 'auto-start-reverse')
