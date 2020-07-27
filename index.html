@@ -190,52 +190,44 @@ function goToMicro() {
             .range([height / 2, 0]);
 
         yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
-
+	 
+	setTimeout(function() {return add_arrows();}, ts*30)
+	    
+	function add_arrows() {
+		
         var mark2 = svg
             .append('defs')
             .append('marker')
             .attr('id', 'arrow2')
-            .attr('viewBox', [0, 0, 20, 20])
-            .attr('refX', 10)
-            .attr('refY', 10)
-            .attr('markerWidth', 5)
-            .attr('markerHeight', 5)
+            .attr('viewBox', [0, 0, 30, 30])
+            .attr('refX', 15)
+            .attr('refY', 15)
+            .attr('markerWidth', 10)
+            .attr('markerHeight', 10)
             .attr('orient', 'auto-start-reverse')
             .append('path')
             .attr('d', d3.line()(arrowPoints))
-            .attr('stroke', 'white').attr('fill', 'white');
+            .attr('stroke', 'black');
 
 
         var arr1 = svg
             .append('path')
             .attr('id', 'arr1')
-            .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 300, 200]]))
+            .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 200, 300]]))
             .attr('stroke', 'white')
             .attr('marker-end', 'url(#arrow)')
             .attr('fill', 'none');
 
-        arr1.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black");
 
         var arr2 = svg
             .append('path')
             .attr('id', 'arr2')
             .attr('d', d3.line()([[width + 30, margin.top + 160], [width / 2 + 10, 300]]))
-            .attr('stroke', 'white')
+            .attr('stroke', 'black')
             .attr('marker-end', 'url(#arrow2)')
             .attr('fill', 'none');
 
-        arr2.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black");
-
-        mark2.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black").attr('fill', 'black');
+	}
 
     })
 
