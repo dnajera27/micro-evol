@@ -478,10 +478,37 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
         temp_annot.transition()
             .delay(ts * 40)
             .duration(ts * 5)
-            .attr("fill", "blue");
-    
+            .attr("fill", "#117a65");
+	    
+  focus
+    .append('defs')
+    .append('marker')
+    .attr('id', 'arrow')
+    .attr('viewBox', [0, 0, 20, 20])
+    .attr('refX', 10)
+    .attr('refY', 10)
+    .attr('markerWidth', 5)
+    .attr('markerHeight', 5)
+    .attr('orient', 'auto-start-reverse')
+    .append('path')
+    .attr('d', d3.line()(arrowPoints))
+    .attr('stroke', 'black');
+
+  var arr = svg
+    .append('path')
+    .attr('d', d3.line()([[30,height / 2 - 25], [35, function() { return y(35) + 5;}]]))
+    .attr('stroke', 'white')
+    .attr('marker-end', 'url(#arrow)')
+    .attr('fill', 'none');
+   
+        arr.transition()
+            .delay(ts * 40)
+            .duration(ts * 5)
+            .attr("stroke", "black");
+	    
     })
 
+	
 
 }
 	
@@ -535,7 +562,7 @@ var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 
     txt_3.transition()
         .delay(ts * 1)
-        .attr("fill", "red");
+        .attr("fill", "#117a65");
 	    
 })
 }
