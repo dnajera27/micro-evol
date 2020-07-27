@@ -50,14 +50,15 @@
 	
 <script>
 
+
 document.getElementById("amButton").disabled = true;
 document.getElementById("microButton").disabled = true;
 document.getElementById("exploreButton").disabled = true;
-	
-	
+
+
 goToAM()
-	
-	
+
+
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 600, bottom: 30, left: 60 },
     width = 400,
@@ -93,39 +94,41 @@ var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
 var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 //Read the data
 
-function button1(){
-document.getElementById("amButton").disabled = false;
-}
-	
-function button2(){
-setTimeout(function() {
-	document.getElementById("microButton").disabled = false;}, ts*42);
-}
-	
-function button3(){
-setTimeout(function() {
-	document.getElementById("exploreButton").disabled = false;}, ts*30);
+function button1() {
+    document.getElementById("amButton").disabled = false;
 }
 
-function pre_goToAM(){
-document.getElementById("amButton").disabled = true;
-document.getElementById("microButton").disabled = true;
-document.getElementById("exploreButton").disabled = true;
-	
-	svg.selectAll("*").remove();
-        focus.selectAll("*").remove();
-
-	goToAM()
+function button2() {
+    setTimeout(function () {
+        document.getElementById("microButton").disabled = false;
+    }, ts * 42);
 }
-	
+
+function button3() {
+    setTimeout(function () {
+        document.getElementById("exploreButton").disabled = false;
+    }, ts * 30);
+}
+
+function pre_goToAM() {
+    document.getElementById("amButton").disabled = true;
+    document.getElementById("microButton").disabled = true;
+    document.getElementById("exploreButton").disabled = true;
+
+    svg.selectAll("*").remove();
+    focus.selectAll("*").remove();
+
+    goToAM()
+}
+
 function goToMicro() {
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
-	button3()
-	    
-	console.log(document.getElementById("microButton").disabled);
-	console.log(document.getElementById("amButton").disabled);
-	    
+        button3()
+
+        console.log(document.getElementById("microButton").disabled);
+        console.log(document.getElementById("amButton").disabled);
+
         svg.selectAll("text")
             .attr("fill", "white")
 
@@ -137,7 +140,7 @@ function goToMicro() {
 
 
         var imgs = svg.append("svg:image")
-	    .attr("id", "micro_img")
+            .attr("id", "micro_img")
             .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
             .attr("x", width + 100)
             .attr("y", 150)
@@ -181,283 +184,285 @@ function goToMicro() {
             .delay(ts * 16)
             .duration(ts * 10)
             .attr("fill", "black");
-	   
-    // Y axis: scale and draw:
-    var yhist = d3.scaleLinear()
-        .range([height / 2, 0]);
-
-    yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
-	    
-  var mark2 = svg
-    .append('defs')
-    .append('marker')
-    .attr('id', 'arrow2')
-    .attr('viewBox', [0, 0, 20, 20])
-    .attr('refX', 10)
-    .attr('refY', 10)
-    .attr('markerWidth', 5)
-    .attr('markerHeight', 5)
-    .attr('orient', 'auto-start-reverse')
-    .append('path')
-    .attr('d', d3.line()(arrowPoints))
-    .attr('stroke', 'white').attr('fill', 'white');
-
-
-  var arr1 = svg
-    .append('path')
-    .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 300, 200]]))
-    .attr('stroke', 'white')
-    .attr('marker-end', 'url(#arrow)')
-    .attr('fill', 'none');
-   
-        arr1.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black");
-	    
-  var arr2 = svg
-    .append('path')
-    .attr('d', d3.line()([[width + 30, margin.top + 160], [width/2 + 10, 300]]))
-    .attr('stroke', 'white')
-    .attr('marker-end', 'url(#arrow2)')
-    .attr('fill', 'none');
-   
-        arr2.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black");
-	    
-	            mark2.transition()
-            .delay(ts * 24)
-            .duration(ts * 5)
-            .attr("stroke", "black").attr('fill', 'black');
-	    
-    })
-
-}
-
-function goToAM(){
-	
-d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
-	
-    button2()
-	
-    var valueKey = data.columns;
-
-        svg.selectAll("text")
-            .attr("fill", "white")
-	
-	svg.selectAll("#micro_img")
-	.style("opacity", 0)
-
-    function getFilteredData(d, group) {
-        return d.g.filter(function (v) { return v === group; });
-    }
-
-
-    // Add X axis
-   var x = d3.scaleLinear()
-        .domain([-0.004, 0.004])
-        .range([0, width]);
-
-//    svg.append("g")
-//        .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
-//        .attr("transform", "translate(0," + height + ")")
-//        .call(d3.axisBottom(x))
-
-    // Add Y axis
-   var y = d3.scaleLinear()
-       .domain([-0.004, 0.004])
-      .range([height, 0]);
-//    svg.append("g")
-//        .call(d3.axisLeft(y));
-
-    // Add dots
-    svg.append('g')
-        .selectAll("dot")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function (d) { return x(d.x); })
-        .attr("y", function (d) { return y(d.y); })
-        .attr("height", 10).attr("width", 10)
-        .attr('pointer-events', 'none')
-        .style("fill", function (d) { return color(d.T0); })
-        .on("mouseover", function (d) {
-            div.transition()
-                .duration(200)
-                .style("opacity", .9);
-            div.html("Grain Orientation: " + Math.round(d.a))
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-        })
-        .on("mouseout", function (d) {
-            div.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
-        .on("click", function (d) {
-            onClick(d.g)
-        });
-
-
-    for (i = 0; i <= 42; i++) {
-        svg.selectAll("rect")
-            .transition()
-            .delay(ts * (i))
-            .duration(ts)
-            .style("fill", function (d) { return color(d[valueKey[i + 2]]); });
-    }
-
-
-
-    //Add SVG Text Element Attributes
-    var txt_1 = svg.selectAll("text.first")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("x", width + 10)
-        .attr("y", margin.top)
-        .text('This is the simulated additive manufacturing of a single layer in a steel cylinder...')
-        .attr("font-family", "serif")
-        .attr("font-size", "16px")
-        .attr("fill", "white");
-
-    var txt_2 = svg.selectAll("text.second")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("x", width + 10)
-        .attr("y", margin.top + 100)
-        .text('The red areas represent the melt-pool moving as material is deposited...')
-        .attr("font-family", "serif")
-        .attr("font-size", "16px")
-        .attr("fill", "white");
-
-    var txt_3 = svg.selectAll("text.third")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("x", width + 10)
-        .attr("y", margin.top + 200)
-        .text('The blue areas represent the material as it cools and solidifies...')
-        .attr("font-family", "serif")
-        .attr("font-size", "16px")
-        .attr("fill", "white");
-
-
-    txt_1.transition()
-        .delay(ts * 2)
-        .attr("fill", "black");
-
-    txt_2.transition()
-        .delay(ts * 16)
-        .duration(ts * 5)
-        .attr("fill", "black");
-
-    txt_3.transition()
-        .delay(ts * 31)
-        .duration(ts * 5)
-        .attr("fill", "black");
-
-    // txt_1.transition()
-    //     .delay(ts * 48)
-    //     .attr("fill", "white");
-
-    // txt_2.transition()
-    //     .delay(ts * 48)
-    //     .attr("fill", "white");
-
-    // txt_3.transition()
-    //     .delay(ts * 48)
-    //     .attr("fill", "white");
-
-    function onClick(group) {
-	    
-
-        focus.selectAll("rect").remove();
-        focus.selectAll("#xhist").remove()
-        focus.selectAll("#yhist").remove()
-        focus.selectAll("#hist_title").remove()
-        focus.selectAll("#ylabel").remove()
-
-        // X axis: scale and draw:
-        var xhist = d3.scaleLinear()
-            .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-            .range([0, width]);
-        focus.append("g")
-            .attr("id", "xhist")
-            .attr("transform", "translate(" + eval(width + 50) + "," + height / 2 + ")")
-            .call(d3.axisBottom(xhist));
-
-        // set the parameters for the histogram
-
-        var histogram = d3.histogram()
-            .value(function (d) { return d.a; })   // I need to give the vector of value
-            .domain(xhist.domain())  // then the domain of the graphic
-            .thresholds(xhist.ticks(30)); // then the numbers of bins
-
-        var filt_data = data.filter(function (d) { return d.g == group; })
-
-        console.log(filt_data)
-
-        // And apply this function to data to get the bins
-        var bins = histogram(filt_data);
-
 
         // Y axis: scale and draw:
         var yhist = d3.scaleLinear()
             .range([height / 2, 0]);
 
-        yhist.domain([0, d3.max(bins, function (d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+        yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
 
-        focus.append("g")
-            .attr("id", "yhist")
-            .attr("transform", "translate(" + eval(width + 50) + ")")
-            .call(d3.axisLeft(yhist));
+        var mark2 = svg
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrow2')
+            .attr('viewBox', [0, 0, 20, 20])
+            .attr('refX', 10)
+            .attr('refY', 10)
+            .attr('markerWidth', 5)
+            .attr('markerHeight', 5)
+            .attr('orient', 'auto-start-reverse')
+            .append('path')
+            .attr('d', d3.line()(arrowPoints))
+            .attr('stroke', 'white').attr('fill', 'white');
 
-        function translate_hist(d) {
-            return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
+
+        var arr1 = svg
+            .append('path')
+            .attr('id', 'arr1')
+            .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 300, 200]]))
+            .attr('stroke', 'white')
+            .attr('marker-end', 'url(#arrow)')
+            .attr('fill', 'none');
+
+        arr1.transition()
+            .delay(ts * 24)
+            .duration(ts * 5)
+            .attr("stroke", "black");
+
+        var arr2 = svg
+            .append('path')
+            .attr('id', 'arr2')
+            .attr('d', d3.line()([[width + 30, margin.top + 160], [width / 2 + 10, 300]]))
+            .attr('stroke', 'white')
+            .attr('marker-end', 'url(#arrow2)')
+            .attr('fill', 'none');
+
+        arr2.transition()
+            .delay(ts * 24)
+            .duration(ts * 5)
+            .attr("stroke", "black");
+
+        mark2.transition()
+            .delay(ts * 24)
+            .duration(ts * 5)
+            .attr("stroke", "black").attr('fill', 'black');
+
+    })
+
+}
+
+function goToAM() {
+
+    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
+
+        button2()
+
+        var valueKey = data.columns;
+
+        svg.selectAll("text")
+            .attr("fill", "white")
+
+        svg.selectAll("#micro_img")
+            .style("opacity", 0)
+
+        function getFilteredData(d, group) {
+            return d.g.filter(function (v) { return v === group; });
         }
 
-        // append the bar rectangles to the svg element
-        focus.selectAll("rect")
-            .data(bins)
+
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([-0.004, 0.004])
+            .range([0, width]);
+
+        //    svg.append("g")
+        //        .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
+        //        .attr("transform", "translate(0," + height + ")")
+        //        .call(d3.axisBottom(x))
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([-0.004, 0.004])
+            .range([height, 0]);
+        //    svg.append("g")
+        //        .call(d3.axisLeft(y));
+
+        // Add dots
+        svg.append('g')
+            .selectAll("dot")
+            .data(data)
             .enter()
-            .filter(function (d) { return d.g = group; })
             .append("rect")
-            .attr("x", 1)
-            .attr("transform", function (d) { return translate_hist(d); })
-            .attr("width", function (d) { return xhist(d.x1) - xhist(d.x0) - 1; })
-            .attr("height", function (d) { return height / 2.0 - yhist(d.length); })
-            .style("fill", "#69b3a2")
+            .attr("x", function (d) { return x(d.x); })
+            .attr("y", function (d) { return y(d.y); })
+            .attr("height", 10).attr("width", 10)
+            .attr('pointer-events', 'none')
+            .style("fill", function (d) { return color(d.T0); })
+            .on("mouseover", function (d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html("Grain Orientation: " + Math.round(d.a))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
+            .on("click", function (d) {
+                onClick(d.g)
+            });
 
-        focus.append("text")
-            .attr("id", "hist_title")
-            .attr("class", "x label")
-            .attr("text-anchor", "end")
-            .attr("x", width * 2 + 50)
-            .attr("y", 5)
-            .text("Grain Orientation Histogram");
 
-        focus.append("text")
-            .attr("id", "ylabel")
-            .attr("class", "y label")
-            .attr("text-anchor", "end")
-            .attr("y", 6)
-            .attr("dy", ".75em")
-            .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
-            .text("Orientation, degrees    ");
-    }
-	
-})
+        for (i = 0; i <= 42; i++) {
+            svg.selectAll("rect")
+                .transition()
+                .delay(ts * (i))
+                .duration(ts)
+                .style("fill", function (d) { return color(d[valueKey[i + 2]]); });
+        }
+
+
+
+        //Add SVG Text Element Attributes
+        var txt_1 = svg.selectAll("text.first")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top)
+            .text('This is the simulated additive manufacturing of a single layer in a steel cylinder...')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+
+        var txt_2 = svg.selectAll("text.second")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top + 100)
+            .text('The red areas represent the melt-pool moving as material is deposited...')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+
+        var txt_3 = svg.selectAll("text.third")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top + 200)
+            .text('The blue areas represent the material as it cools and solidifies...')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
+
+
+        txt_1.transition()
+            .delay(ts * 2)
+            .attr("fill", "black");
+
+        txt_2.transition()
+            .delay(ts * 16)
+            .duration(ts * 5)
+            .attr("fill", "black");
+
+        txt_3.transition()
+            .delay(ts * 31)
+            .duration(ts * 5)
+            .attr("fill", "black");
+
+        // txt_1.transition()
+        //     .delay(ts * 48)
+        //     .attr("fill", "white");
+
+        // txt_2.transition()
+        //     .delay(ts * 48)
+        //     .attr("fill", "white");
+
+        // txt_3.transition()
+        //     .delay(ts * 48)
+        //     .attr("fill", "white");
+
+        function onClick(group) {
+
+
+            focus.selectAll("rect").remove();
+            focus.selectAll("#xhist").remove()
+            focus.selectAll("#yhist").remove()
+            focus.selectAll("#hist_title").remove()
+            focus.selectAll("#ylabel").remove()
+
+            // X axis: scale and draw:
+            var xhist = d3.scaleLinear()
+                .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+                .range([0, width]);
+            focus.append("g")
+                .attr("id", "xhist")
+                .attr("transform", "translate(" + eval(width + 50) + "," + height / 2 + ")")
+                .call(d3.axisBottom(xhist));
+
+            // set the parameters for the histogram
+
+            var histogram = d3.histogram()
+                .value(function (d) { return d.a; })   // I need to give the vector of value
+                .domain(xhist.domain())  // then the domain of the graphic
+                .thresholds(xhist.ticks(30)); // then the numbers of bins
+
+            var filt_data = data.filter(function (d) { return d.g == group; })
+
+            console.log(filt_data)
+
+            // And apply this function to data to get the bins
+            var bins = histogram(filt_data);
+
+
+            // Y axis: scale and draw:
+            var yhist = d3.scaleLinear()
+                .range([height / 2, 0]);
+
+            yhist.domain([0, d3.max(bins, function (d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+
+            focus.append("g")
+                .attr("id", "yhist")
+                .attr("transform", "translate(" + eval(width + 50) + ")")
+                .call(d3.axisLeft(yhist));
+
+            function translate_hist(d) {
+                return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
+            }
+
+            // append the bar rectangles to the svg element
+            focus.selectAll("rect")
+                .data(bins)
+                .enter()
+                .filter(function (d) { return d.g = group; })
+                .append("rect")
+                .attr("x", 1)
+                .attr("transform", function (d) { return translate_hist(d); })
+                .attr("width", function (d) { return xhist(d.x1) - xhist(d.x0) - 1; })
+                .attr("height", function (d) { return height / 2.0 - yhist(d.length); })
+                .style("fill", "#69b3a2")
+
+            focus.append("text")
+                .attr("id", "hist_title")
+                .attr("class", "x label")
+                .attr("text-anchor", "end")
+                .attr("x", width * 2 + 50)
+                .attr("y", 5)
+                .text("Grain Orientation Histogram");
+
+            focus.append("text")
+                .attr("id", "ylabel")
+                .attr("class", "y label")
+                .attr("text-anchor", "end")
+                .attr("y", 6)
+                .attr("dy", ".75em")
+                .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
+                .text("Orientation, degrees    ");
+        }
+
+    })
 
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function (data) {
         // Now I can use this dataset:
-	    
-	          focus.selectAll("text")
+
+        focus.selectAll("text")
             .attr("fill", "white")
-    
+
         // Add X axis --> it is a date format
         var x = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) { return +d.t; })])
@@ -465,14 +470,14 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
         focus.append("g")
             .attr("transform", "translate(0," + height / 2 + ")")
             .call(d3.axisBottom(x));
-    
+
         // Add Y axis
         var y = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) { return +d.Tmax; })])
             .range([height / 2, 0]);
         focus.append("g")
             .call(d3.axisLeft(y));
-    
+
         // Add the line
         var line = focus.append("path")
             .datum(data)
@@ -482,14 +487,14 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
             .attr("d", d3.line()
                 .x(function (d) { return x(d.t) })
                 .y(function (d) { return y(d.Tmax) }));
-    
+
         focus.append("text")
             .attr("class", "x label")
             .attr("text-anchor", "end")
             .attr("x", width)
             .attr("y", height / 2 - 6)
             .text("Time, s");
-    
+
         focus.append("text")
             .attr("class", "y label")
             .attr("text-anchor", "end")
@@ -497,15 +502,15 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
             .attr("dy", ".75em")
             .attr("transform", "rotate(-90)")
             .text("Temperature, K    ");
-    
+
         var totalLength = line.node().getTotalLength();
-    
+
         line.attr("stroke-dasharray", totalLength)
             .attr("stroke-dashoffset", totalLength)
             .transition()
             .duration(ts * (42))
             .attr('stroke-dashoffset', 0);
-    
+
         var txt_4 = focus.selectAll("text.fourth")
             .data(data)
             .enter()
@@ -519,117 +524,117 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
             .delay(ts * 7)
             .duration(ts * 5)
             .attr("fill", "black");
-    
+
         var temp_annot = focus.append("text")
             .attr("class", "annot")
             .attr("x", 20)
             .attr("y", height / 2 - 30)
             .text("The max temperature is always above the melting temperature (1615 K)")
             .attr("fill", "white")
-	    .attr("font-size", "12px");
-    
+            .attr("font-size", "12px");
+
         temp_annot.transition()
             .delay(ts * 40)
             .duration(ts * 5)
             .attr("fill", "#0e6655");
 
 
-	    
-  var mark = focus
-    .append('defs')
-    .append('marker')
-    .attr('id', 'arrow')
-    .attr('viewBox', [0, 0, 20, 20])
-    .attr('refX', 10)
-    .attr('refY', 10)
-    .attr('markerWidth', 5)
-    .attr('markerHeight', 5)
-    .attr('orient', 'auto-start-reverse')
-    .append('path')
-    .attr('d', d3.line()(arrowPoints))
-    .attr('stroke', 'white').attr('fill', 'white');
 
-  var arr = focus
-    .append('path')
-    .attr('d', d3.line()([[50,height / 2 - 40], [110, height/2*0.3]]))
-    .attr('stroke', 'white')
-    .attr('marker-end', 'url(#arrow)')
-    .attr('fill', 'none');
-   
+        var mark = focus
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrow')
+            .attr('viewBox', [0, 0, 20, 20])
+            .attr('refX', 10)
+            .attr('refY', 10)
+            .attr('markerWidth', 5)
+            .attr('markerHeight', 5)
+            .attr('orient', 'auto-start-reverse')
+            .append('path')
+            .attr('d', d3.line()(arrowPoints))
+            .attr('stroke', 'white').attr('fill', 'white');
+
+        var arr = focus
+            .append('path')
+            .attr('d', d3.line()([[50, height / 2 - 40], [110, height / 2 * 0.3]]))
+            .attr('stroke', 'white')
+            .attr('marker-end', 'url(#arrow)')
+            .attr('fill', 'none');
+
         arr.transition()
             .delay(ts * 40)
             .duration(ts * 5)
             .attr("stroke", "black");
-	    
-	            mark.transition()
+
+        mark.transition()
             .delay(ts * 40)
             .duration(ts * 5)
             .attr("stroke", "black").attr('fill', 'black');
-	    
+
     })
 
-	
+
 
 }
-	
 
 
-function goToExplore(){
 
-        svg.selectAll("text")
-            .attr("fill", "white")
-	
-	mark2.remove()
-	arr1.remove()
-	arr2.remove()
-	
+function goToExplore() {
+
+    svg.selectAll("text")
+        .remove()
+
+    svg.selectAll('#arrow2').remove()
+    svg.selectAll('#arr1').remove()
+    svg.selectAll('#arr2').remove()
+
     button1()
-	
-	
+
+
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
-    svg.selectAll("rect").attr('pointer-events', 'auto');
-	   
-    var txt_3 = svg.selectAll("text.third")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("x", width + 10)
-        .attr("y", margin.top + 100)
-        .text('Click on the grains to visualize the grain orientation distribution.')
-        .attr("font-family", "serif")
-        .attr("font-size", "16px")
-        .attr("fill", "white");
+        svg.selectAll("rect").attr('pointer-events', 'auto');
 
-var arrowPoints = [[0, 0], [0, 20], [20, 10]];
-	    
-  svg
-    .append('defs')
-    .append('marker')
-    .attr('id', 'arrow')
-    .attr('viewBox', [0, 0, 20, 20])
-    .attr('refX', 10)
-    .attr('refY', 10)
-    .attr('markerWidth', 5)
-    .attr('markerHeight', 5)
-    .attr('orient', 'auto-start-reverse')
-    .append('path')
-    .attr('d', d3.line()(arrowPoints))
-    .attr('stroke', 'black');
+        var txt_3 = svg.selectAll("text.third")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("x", width + 10)
+            .attr("y", margin.top + 100)
+            .text('Click on the grains to visualize the grain orientation distribution.')
+            .attr("font-family", "serif")
+            .attr("font-size", "16px")
+            .attr("fill", "white");
 
-  svg
-    .append('path')
-    .attr('d', d3.line()([[width + 15, margin.top + 110], [width*0.8, height/2]]))
-    .attr('stroke', 'black')
-    .attr('marker-end', 'url(#arrow)')
-    .attr('fill', 'none');
-	    
+        var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 
-    txt_3.transition()
-        .delay(ts * 1)
-        .attr("fill", "#0e6655");
-	    
-})
+        svg
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrow')
+            .attr('viewBox', [0, 0, 20, 20])
+            .attr('refX', 10)
+            .attr('refY', 10)
+            .attr('markerWidth', 5)
+            .attr('markerHeight', 5)
+            .attr('orient', 'auto-start-reverse')
+            .append('path')
+            .attr('d', d3.line()(arrowPoints))
+            .attr('stroke', 'black');
+
+        svg
+            .append('path')
+            .attr('d', d3.line()([[width + 15, margin.top + 110], [width * 0.8, height / 2]]))
+            .attr('stroke', 'black')
+            .attr('marker-end', 'url(#arrow)')
+            .attr('fill', 'none');
+
+
+        txt_3.transition()
+            .delay(ts * 1)
+            .attr("fill", "#0e6655");
+
+    })
 }
 
 
