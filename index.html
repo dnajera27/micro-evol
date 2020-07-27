@@ -11,7 +11,7 @@
 <input id="amButton" 
            type="button" 
            value="1. AM Build" 
-           onclick="goToAM()" />
+           onclick="pre_goToAM()" />
 </div>
 <div id="option2">
 <input id="microButton" 
@@ -107,6 +107,17 @@ setTimeout(function() {
 	document.getElementById("exploreButton").disabled = false;}, ts*30);
 }
 
+function pre_goToAM(){
+
+        focus.selectAll("rect").remove();
+        focus.selectAll("#xhist").remove()
+        focus.selectAll("#yhist").remove()
+        focus.selectAll("#hist_title").remove()
+        focus.selectAll("#ylabel").remove()
+	
+	goToAM()
+}
+	
 function goToMicro() {
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
