@@ -16,13 +16,13 @@
 <div id="option2">
 <input name="microButton" 
            type="button" 
-           value="Microstructure" 
+           value="2. Microstructure" 
            onclick="goToMicro()" />
 </div>
 <div id="option3">
 <input name="exploreButton" 
            type="button" 
-           value="Explore" 
+           value="3. Explore" 
            onclick="goToExplore()" />
 </div>
 <div id="cylinder"></div>
@@ -111,7 +111,7 @@ function goToMicro() {
             .style("opacity", 0);
 
         imgs.transition()
-            .delay(ts * 8)
+            .delay(ts * 24)
             .style("opacity", 1)
 
 
@@ -138,12 +138,12 @@ function goToMicro() {
             .attr("fill", "white");
 
         txt_micro.transition()
-            .delay(ts * 16)
+            .delay(ts * 8)
             .duration(ts * 10)
             .attr("fill", "black");
 
         txt_micro2.transition()
-            .delay(ts * 24)
+            .delay(ts * 16)
             .duration(ts * 10)
             .attr("fill", "black");
     })
@@ -215,10 +215,6 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
     }
 
 
-    svg.selectAll("rect")
-        .transition()
-        .delay(ts * 48)
-        .attr('pointer-events', 'auto');
 
     //Add SVG Text Element Attributes
     var txt_1 = svg.selectAll("text.first")
@@ -364,18 +360,13 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
 
 }
-
-function goToExplore(){
-
-    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
-
+	
     // Y axis: scale and draw:
     var yhist = d3.scaleLinear()
         .range([height / 2, 0]);
 
     yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
-
-
+	
     function onClick(group) {
 
         focus.selectAll("rect").remove();
@@ -453,8 +444,15 @@ function goToExplore(){
             .text("Orientation, degrees    ");
     }
 
+function goToExplore(){
 
+    d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
+        svg.selectAll("rect")
+        .transition()
+        .delay(ts * 48)
+        .attr('pointer-events', 'auto');
+	    
 })
 }
 
