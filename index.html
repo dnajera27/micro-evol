@@ -192,6 +192,9 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
         svg.selectAll("text")
             .attr("fill", "white")
+	
+	svg.selectAll("svg:image")
+	.style("opacity", 0)
 
     function getFilteredData(d, group) {
         return d.g.filter(function (v) { return v === group; });
