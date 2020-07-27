@@ -8,7 +8,7 @@
 <body>
 <!-- Create a div where the graph will take place -->
 <div id="option1">
-<input name="amButton" 
+<input id="amButton" 
            type="button" 
            value="1. AM Build" 
            onclick="goToAM()" />
@@ -90,7 +90,7 @@ var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
 //Read the data
 
 function button1(){
-document.getElementByName("amButton").disabled = true;
+document.getElementById("amButton").disabled = true;
 setTimeout(function() {
 	document.getElementById("amButton").disabled = false;}, ts*42);
 }
