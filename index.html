@@ -50,6 +50,7 @@
 	
 <script>
 
+button1()
 goToAM()
 	
 	
@@ -88,6 +89,11 @@ var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
 
 //Read the data
 
+function button1(){
+document.getElementById("button1").disabled = true;
+setTimeOut(function() {
+	document.getElementById("button1").disabled = false;}, ts*42);
+}
 
 function goToMicro() {
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
