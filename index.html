@@ -496,7 +496,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
     .attr('d', d3.line()(arrowPoints))
     .attr('stroke', 'black');
 
-  var arr = svg
+  var arr = focus
     .append('path')
     .attr('d', d3.line()([[30,height / 2 - 25], [35, function() { return y(35) + 5;}]]))
     .attr('stroke', 'white')
