@@ -202,8 +202,8 @@ function goToMicro() {
             .attr('viewBox', [0, 0, 30, 30])
             .attr('refX', 15)
             .attr('refY', 15)
-            .attr('markerWidth', 10)
-            .attr('markerHeight', 10)
+            .attr('markerWidth', 15)
+            .attr('markerHeight', 15)
             .attr('orient', 'auto-start-reverse')
             .append('path')
             .attr('d', d3.line()(arrowPoints))
@@ -215,7 +215,7 @@ function goToMicro() {
             .attr('id', 'arr1')
             .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 200, 300]]))
             .attr('stroke', 'white')
-            .attr('marker-end', 'url(#arrow)')
+            .attr('marker-end', 'url(#arrow2)')
             .attr('fill', 'none');
 
 
