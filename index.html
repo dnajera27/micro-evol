@@ -184,8 +184,38 @@ function goToMicro() {
         .range([height / 2, 0]);
 
     yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
-	
+	    
+  var mark = svg
+    .append('defs')
+    .append('marker')
+    .attr('id', 'arrow')
+    .attr('viewBox', [0, 0, 20, 20])
+    .attr('refX', 10)
+    .attr('refY', 10)
+    .attr('markerWidth', 5)
+    .attr('markerHeight', 5)
+    .attr('orient', 'auto-start-reverse')
+    .append('path')
+    .attr('d', d3.line()(arrowPoints))
+    .attr('stroke', 'white').attr('fill', 'white');
 
+
+  var arr = svg
+    .append('path')
+    .attr('d', d3.line()([[width + 30, margin.top + 165], [width + 300, 300]]))
+    .attr('stroke', 'white')
+    .attr('marker-end', 'url(#arrow)')
+    .attr('fill', 'none');
+   
+        arr.transition()
+            .delay(ts * 24)
+            .duration(ts * 5)
+            .attr("stroke", "black");
+	    
+	            mark.transition()
+            .delay(ts * 24)
+            .duration(ts * 5)
+            .attr("stroke", "black").attr('fill', 'black');
 	    
     })
 
@@ -502,7 +532,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
     .attr('orient', 'auto-start-reverse')
     .append('path')
     .attr('d', d3.line()(arrowPoints))
-    .attr('stroke', 'white');
+    .attr('stroke', 'white').attr('fill', 'white');
 
   var arr = focus
     .append('path')
@@ -519,7 +549,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 	            mark.transition()
             .delay(ts * 40)
             .duration(ts * 5)
-            .attr("stroke", "black");
+            .attr("stroke", "black").attr('fill', 'black');
 	    
     })
 
