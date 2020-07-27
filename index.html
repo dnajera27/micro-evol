@@ -241,7 +241,7 @@ txt_3.transition()
 	
       yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
 
-function goToMicro(){
+var goToMicro = function(){
 
   svg.selectAll("rect")
     .transition()
