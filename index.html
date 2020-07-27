@@ -90,7 +90,7 @@ var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.int
     .domain([1700, 300]);
 
 var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
-
+var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 //Read the data
 
 function button1(){
@@ -518,7 +518,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
             .duration(ts * 5)
             .attr("fill", "#0e6655");
 
-	   var arrowPoints = [[0, 0], [0, 20], [20, 10]];
+
 	    
   var mark = focus
     .append('defs')
