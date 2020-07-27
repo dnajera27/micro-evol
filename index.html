@@ -66,6 +66,11 @@ var margin = {top: 10, right: 600, bottom: 30, left: 60},
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);	
+
+  var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
+    .domain([1700, 300]);
+	
+  var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
 	
 //Read the data
 	
@@ -103,10 +108,7 @@ function getFilteredData(d, group) {
 }
 
 
-  var color = d3.scaleSequential(d3.interpolateRdYlBu) //d3.scaleSequential(d3.interpolateRgb("red", "blue")(0.5))
-    .domain([1700, 300]);
-	
-  var cat = d3.scaleOrdinal().domain([0.0, 7.0]).range(d3.schemeTableau10)
+
 
   // Add X axis
   var x = d3.scaleLinear()
