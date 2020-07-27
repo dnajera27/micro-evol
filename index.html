@@ -185,12 +185,6 @@ function goToMicro() {
 
 function goToAM(){
 	
-        focus.selectAll("rect").remove();
-        focus.selectAll("#xhist").remove()
-        focus.selectAll("#yhist").remove()
-        focus.selectAll("#hist_title").remove()
-        focus.selectAll("#ylabel").remove()
-	
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 	
     button2()
