@@ -153,83 +153,7 @@ function goToMicro() {
 
     yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
 	
-    function onClick(group) {
-	    
 
-        focus.selectAll("rect").remove();
-        focus.selectAll("#xhist").remove()
-        focus.selectAll("#yhist").remove()
-        focus.selectAll("#hist_title").remove()
-        focus.selectAll("#ylabel").remove()
-
-        // X axis: scale and draw:
-        var xhist = d3.scaleLinear()
-            .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-            .range([0, width]);
-        focus.append("g")
-            .attr("id", "xhist")
-            .attr("transform", "translate(" + eval(width + 50) + "," + height / 2 + ")")
-            .call(d3.axisBottom(xhist));
-
-        // set the parameters for the histogram
-
-        var histogram = d3.histogram()
-            .value(function (d) { return d.a; })   // I need to give the vector of value
-            .domain(xhist.domain())  // then the domain of the graphic
-            .thresholds(xhist.ticks(30)); // then the numbers of bins
-
-        var filt_data = data.filter(function (d) { return d.g == group; })
-
-        console.log(filt_data)
-
-        // And apply this function to data to get the bins
-        var bins = histogram(filt_data);
-
-
-        // Y axis: scale and draw:
-        var yhist = d3.scaleLinear()
-            .range([height / 2, 0]);
-
-        yhist.domain([0, d3.max(bins, function (d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
-
-        focus.append("g")
-            .attr("id", "yhist")
-            .attr("transform", "translate(" + eval(width + 50) + ")")
-            .call(d3.axisLeft(yhist));
-
-        function translate_hist(d) {
-            return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
-        }
-
-        // append the bar rectangles to the svg element
-        focus.selectAll("rect")
-            .data(bins)
-            .enter()
-            .filter(function (d) { return d.g = group; })
-            .append("rect")
-            .attr("x", 1)
-            .attr("transform", function (d) { return translate_hist(d); })
-            .attr("width", function (d) { return xhist(d.x1) - xhist(d.x0) - 1; })
-            .attr("height", function (d) { return height / 2.0 - yhist(d.length); })
-            .style("fill", "#69b3a2")
-
-        focus.append("text")
-            .attr("id", "hist_title")
-            .attr("class", "x label")
-            .attr("text-anchor", "end")
-            .attr("x", width * 2 + 50)
-            .attr("y", 5)
-            .text("Grain Orientation Histogram");
-
-        focus.append("text")
-            .attr("id", "ylabel")
-            .attr("class", "y label")
-            .attr("text-anchor", "end")
-            .attr("y", 6)
-            .attr("dy", ".75em")
-            .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
-            .text("Orientation, degrees    ");
-    }
 	    
     })
 
@@ -240,27 +164,30 @@ function goToAM(){
 d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
     var valueKey = data.columns;
 
+        svg.selectAll("text")
+            .attr("fill", "white")
+
     function getFilteredData(d, group) {
         return d.g.filter(function (v) { return v === group; });
     }
 
 
     // Add X axis
-    var x = d3.scaleLinear()
-        .domain([-0.004, 0.004])
-        .range([0, width]);
+//    var x = d3.scaleLinear()
+//        .domain([-0.004, 0.004])
+//        .range([0, width]);
 
-    svg.append("g")
-        .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
+//    svg.append("g")
+//        .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
+//        .attr("transform", "translate(0," + height + ")")
+//        .call(d3.axisBottom(x))
 
     // Add Y axis
-    var y = d3.scaleLinear()
-        .domain([-0.004, 0.004])
-        .range([height, 0]);
-    svg.append("g")
-        .call(d3.axisLeft(y));
+//    var y = d3.scaleLinear()
+//        .domain([-0.004, 0.004])
+//        .range([height, 0]);
+//    svg.append("g")
+//        .call(d3.axisLeft(y));
 
     // Add dots
     svg.append('g')
@@ -362,10 +289,91 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
     //     .delay(ts * 48)
     //     .attr("fill", "white");
 
+    function onClick(group) {
+	    
+
+        focus.selectAll("rect").remove();
+        focus.selectAll("#xhist").remove()
+        focus.selectAll("#yhist").remove()
+        focus.selectAll("#hist_title").remove()
+        focus.selectAll("#ylabel").remove()
+
+        // X axis: scale and draw:
+        var xhist = d3.scaleLinear()
+            .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+            .range([0, width]);
+        focus.append("g")
+            .attr("id", "xhist")
+            .attr("transform", "translate(" + eval(width + 50) + "," + height / 2 + ")")
+            .call(d3.axisBottom(xhist));
+
+        // set the parameters for the histogram
+
+        var histogram = d3.histogram()
+            .value(function (d) { return d.a; })   // I need to give the vector of value
+            .domain(xhist.domain())  // then the domain of the graphic
+            .thresholds(xhist.ticks(30)); // then the numbers of bins
+
+        var filt_data = data.filter(function (d) { return d.g == group; })
+
+        console.log(filt_data)
+
+        // And apply this function to data to get the bins
+        var bins = histogram(filt_data);
+
+
+        // Y axis: scale and draw:
+        var yhist = d3.scaleLinear()
+            .range([height / 2, 0]);
+
+        yhist.domain([0, d3.max(bins, function (d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+
+        focus.append("g")
+            .attr("id", "yhist")
+            .attr("transform", "translate(" + eval(width + 50) + ")")
+            .call(d3.axisLeft(yhist));
+
+        function translate_hist(d) {
+            return "translate(" + eval(width + 50 + xhist(d.x0)) + "," + yhist(d.length) + ")";
+        }
+
+        // append the bar rectangles to the svg element
+        focus.selectAll("rect")
+            .data(bins)
+            .enter()
+            .filter(function (d) { return d.g = group; })
+            .append("rect")
+            .attr("x", 1)
+            .attr("transform", function (d) { return translate_hist(d); })
+            .attr("width", function (d) { return xhist(d.x1) - xhist(d.x0) - 1; })
+            .attr("height", function (d) { return height / 2.0 - yhist(d.length); })
+            .style("fill", "#69b3a2")
+
+        focus.append("text")
+            .attr("id", "hist_title")
+            .attr("class", "x label")
+            .attr("text-anchor", "end")
+            .attr("x", width * 2 + 50)
+            .attr("y", 5)
+            .text("Grain Orientation Histogram");
+
+        focus.append("text")
+            .attr("id", "ylabel")
+            .attr("class", "y label")
+            .attr("text-anchor", "end")
+            .attr("y", 6)
+            .attr("dy", ".75em")
+            .attr("transform", "translate(" + eval(width + 50) + ")rotate(-90)")
+            .text("Orientation, degrees    ");
+    }
+	
 })
 
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v3.csv", function (data) {
         // Now I can use this dataset:
+	    
+	          focus.selectAll("text")
+            .attr("fill", "white")
     
         // Add X axis --> it is a date format
         var x = d3.scaleLinear()
@@ -452,10 +460,7 @@ function goToExplore(){
 
     d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_data_v2.csv", function (data) {
 
-        svg.selectAll("rect")
-        .transition()
-        .delay(ts * 48)
-        .attr('pointer-events', 'auto');
+    svg.selectAll("rect").attr('pointer-events', 'auto');
 	    
 })
 }
