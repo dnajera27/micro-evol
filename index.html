@@ -133,11 +133,7 @@ for(i=0;i<=41;i++){
     .style("fill",  function (d) { return color(d[valueKey[i+2]]); });
 }
 
-  svg.selectAll("rect")
-    .transition()
-    .delay(ts*(42))
-    .duration(ts*5)
-    .style("fill",  function (d) { return cat(d.g); });
+
 
   svg.selectAll("rect")
 	.transition()
@@ -228,15 +224,7 @@ txt_3.transition()
 	.delay(ts*48)
 	.attr("fill", "white");
 	
-txt_micro.transition()
-	.delay(ts*49)
-	.duration(ts*10)
-	.attr("fill", "black");
 
-txt_micro2.transition()
-	.delay(ts*59)
-	.duration(ts*10)
-	.attr("fill", "black");	
 
            var imgs = svg.append("svg:image")
                 .attr("xlink:href", "https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/microstruct_cropped.png")
@@ -245,10 +233,6 @@ txt_micro2.transition()
                 .attr("width", 250)
                 .attr("height", 250)
 	        .style("opacity", 0);
-	
-	imgs.transition()
-	.delay(ts*69)
-	.style("opacity", 1)
 
 
   // Y axis: scale and draw:
@@ -256,6 +240,29 @@ txt_micro2.transition()
       .range([height/2, 0]);
 	
       yhist.domain([0, 170]);   // d3.hist has to be called before the Y axis obviously
+
+function goToMicro(){
+
+  svg.selectAll("rect")
+    .transition()
+    .delay(ts*(42))
+    .duration(ts*5)
+    .style("fill",  function (d) { return cat(d.g); });
+	
+		imgs.transition()
+	.delay(ts*69)
+	.style("opacity", 1)
+
+	txt_micro.transition()
+	.delay(ts*49)
+	.duration(ts*10)
+	.attr("fill", "black");
+
+txt_micro2.transition()
+	.delay(ts*59)
+	.duration(ts*10)
+	.attr("fill", "black");	
+}
 	
 	
 function onClick(group){
