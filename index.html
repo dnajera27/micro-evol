@@ -478,7 +478,9 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
         temp_annot.transition()
             .delay(ts * 40)
             .duration(ts * 5)
-            .attr("fill", "#117a65");
+            .attr("fill", "#0e6655");
+
+	   var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 	    
   focus
     .append('defs')
@@ -562,7 +564,7 @@ var arrowPoints = [[0, 0], [0, 20], [20, 10]];
 
     txt_3.transition()
         .delay(ts * 1)
-        .attr("fill", "#117a65");
+        .attr("fill", "#0e6655");
 	    
 })
 }
