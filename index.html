@@ -207,14 +207,14 @@ function goToMicro() {
             .attr('orient', 'auto-start-reverse')
             .append('path')
             .attr('d', d3.line()(arrowPoints))
-            .attr('stroke', 'black');
+            .attr('stroke', '#76448a').attr('fill', "#76448a");
 
 
         var arr1 = svg
             .append('path')
             .attr('id', 'arr1')
             .attr('d', d3.line()([[width + 30, margin.top + 160], [width + 200, 300]]))
-            .attr('stroke', 'white')
+            .attr('stroke', '#76448a')
             .attr('marker-end', 'url(#arrow2)')
             .attr('fill', 'none');
 
@@ -223,7 +223,7 @@ function goToMicro() {
             .append('path')
             .attr('id', 'arr2')
             .attr('d', d3.line()([[width + 30, margin.top + 160], [width / 2 + 10, 300]]))
-            .attr('stroke', 'black')
+            .attr('stroke', '#76448a')
             .attr('marker-end', 'url(#arrow2)')
             .attr('fill', 'none');
 
