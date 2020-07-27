@@ -509,7 +509,7 @@ d3.csv("https://raw.githubusercontent.com/dnajera27/micro-evol/gh-pages/temp_dat
 
   var arr = focus
     .append('path')
-    .attr('d', d3.line()([[30,height / 2 - 25], [35, function() { return y(35) + 5;}]]))
+    .attr('d', d3.line()([[30,height / 2 - 25], [35, height/2*0.6]]))
     .attr('stroke', 'white')
     .attr('marker-end', 'url(#arrow)')
     .attr('fill', 'none');
